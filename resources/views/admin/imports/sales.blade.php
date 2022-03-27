@@ -6,7 +6,7 @@
                 <div class="card-header-container">
                     <h6 class="card-title">
                         {{ trans('global.create') }}
-                        {{ trans('cruds.labor.title_singular') }}
+                        {{ trans('cruds.sale.title') }}
                     </h6>
                 </div>
             </div>

@@ -25,7 +25,7 @@
         <button class="btn btn-indigo mr-2" type="submit">
             {{ trans('global.save') }}
         </button>
-        <a href="{{ route('admin.labors.index') }}" class="btn btn-secondary">
+        <a href="{{ route('admin.sales.index') }}" class="btn btn-secondary">
             {{ trans('global.cancel') }}
         </a>
     </div>

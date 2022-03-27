@@ -30,7 +30,7 @@ class Index extends Component
 
     public array $paginationOptions;
 
-    
+
     public $start_date ;
     public $end_date ;
     public $from_id;
