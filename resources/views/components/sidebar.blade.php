@@ -130,7 +130,7 @@
                     </li>
                 @endcan
 
-                
+
 
                 @can('unit_access')
                     <li class="items-center">
