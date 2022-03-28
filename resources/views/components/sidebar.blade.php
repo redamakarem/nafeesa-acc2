@@ -79,6 +79,38 @@
                         </ul>
                     </li>
                 @endcan
+
+                @can('sale_access')
+                    <li class="items-center">
+                        <a class="has-sub {{ request()->is("admin/sales*")||request()->is("admin/import/sales*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="#" onclick="window.openSubNav(this)">
+                            <i class="fa-fw fas c-sidebar-nav-icon fa-users">
+                            </i>
+                            {{ trans('cruds.sale.title') }}
+                        </a>
+                        <ul class="ml-4 subnav hidden">
+                            @can('permission_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("admin/permissions*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.sales.index") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        {{ trans('cruds.sale.title') }}
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("admin/import/sales*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.import.sales") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-briefcase">
+                                        </i>
+                                        Import
+                                    </a>
+                                </li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                @endcan
+
                 @can('raw_material_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/raw-materials*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.raw-materials.index") }}">
@@ -98,15 +130,7 @@
                     </li>
                 @endcan
 
-                @can('sale_access')
-                    <li class="items-center">
-                        <a class="{{ request()->is("admin/sales*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.sales.index") }}">
-                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
-                            </i>
-                            {{ trans('cruds.sale.title') }}
-                        </a>
-                    </li>
-                @endcan
+                
 
                 @can('unit_access')
                     <li class="items-center">
