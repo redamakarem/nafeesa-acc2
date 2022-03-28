@@ -108,6 +108,9 @@ class Edit extends Component
             'raw_materials.*.id' => [
                 'sometimes'
             ],
+            'raw_materials.id' => [
+                'numeric'
+            ],
 //            'raw_materials.*.id' => [
 //                'integer',
 //                'exists:raw_materials,id',
@@ -137,10 +140,16 @@ class Edit extends Component
     private function mapRawMaterials($rawMaterials)
     {
         $rawMaterials = array_filter($rawMaterials, function($a) { return ($a !== 0); });
-        return collect($rawMaterials)->map(function ($i) {
-            if ($i !=null && $i>0)
+        $rawMaterials = array_filter($rawMaterials);
+//        dd($rawMaterials);
+        $result= collect($rawMaterials)->map(function ($i) {
+            if ($i !=null && $i>0 && $i!='0')
             return ['amount' => $i];
         });
+
+//        dd($result);
+        return $result;
+
     }
 
     private function mapLabors($labors)
