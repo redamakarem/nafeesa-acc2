@@ -47,7 +47,7 @@ class SalesImport implements ToCollection,WithValidation,SkipsOnError
                     $onFailure('Item ID ' .$value . ' does not exist');
                 }
             },
-            '*.1'  => ['required'],
+
             '*.5'  => ['exists:branches,id'],
             '*.3'  => ['required'],
             '*.2'  => ['required'],
