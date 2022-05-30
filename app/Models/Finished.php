@@ -83,7 +83,13 @@ class Finished extends Model implements HasMedia
 
     public function getProductionLossPercentageAttribute()
     {
-        return 1 - ($this->getOutputsPerKgAttribute()/$this->getInputsPerKgAttribute());
+
+        if ($this->getInputsPerKgAttribute() >0) {
+            return 1 - ($this->getOutputsPerKgAttribute() / $this->getInputsPerKgAttribute());
+        }
+        else{
+            return 1;
+        }
     }
 
     public function getCostPerKgAttribute()
