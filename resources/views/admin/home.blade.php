@@ -39,7 +39,7 @@
 
                             <h2 class="text-2xl font-semibold text-slate-800 mb-2">Total Sales</h2>
                             <div class="flex items-start">
-                                <div class="text-3xl font-bold text-slate-800 mr-2">{{number_format($data['total_sales'],3, '.', ',')}}</div>
+                                <div class="text-3xl font-bold text-slate-800 mr-2">K.D  {{number_format($data['total_sales'],3, '.', ',')}}</div>
 {{--                                <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+49%--}}
 {{--                                </div>--}}
                             </div>
@@ -55,7 +55,7 @@
 
                             <h2 class="text-2xl font-semibold text-slate-800 mb-2">Costs</h2>
                             <div class="flex items-start">
-                                <div class="text-3xl font-bold text-slate-800 mr-2">{{number_format($data['costs'],3, '.', ',')}}</div>
+                                <div class="text-3xl font-bold text-slate-800 mr-2">K.D  {{number_format($data['costs'],3, '.', ',')}}</div>
 {{--                                <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+49%--}}
 {{--                                </div>--}}
                             </div>
@@ -71,7 +71,7 @@
 
                             <h2 class="text-2xl font-semibold text-slate-800 mb-2">Profits</h2>
                             <div class="flex items-start">
-                                <div class="text-3xl font-bold text-slate-800 mr-2">{{number_format($data['profit'],3, '.', ',')}}</div>
+                                <div class="text-3xl font-bold text-slate-800 mr-2">K.D  {{number_format($data['profit'],3, '.', ',')}}</div>
 {{--                                <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+49%--}}
 {{--                                </div>--}}
                             </div>
