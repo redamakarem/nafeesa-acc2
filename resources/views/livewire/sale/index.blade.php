@@ -135,12 +135,14 @@
                     </th>
                     <th>
                         {{ trans('cruds.sale.fields.costs') }}
+                        @include('components.table.sort', ['field' => 'costs'])
                     </th>
                     <th>
                         {{ trans('cruds.sale.fields.sale_price') }}
                     </th>
                     <th>
                         {{ trans('cruds.sale.fields.profit') }}
+                        @include('components.table.sort', ['field' => 'profit'])
                     </th>
                     <th>
                         {{ trans('cruds.sale.fields.date') }}
