@@ -21,6 +21,8 @@ class Sales extends Model
         'id',
         'item.name_en',
         'qty',
+        'costs',
+        'profit',
         'date',
         'branch.title_en',
     ];
