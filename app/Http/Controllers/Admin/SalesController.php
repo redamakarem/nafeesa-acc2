@@ -39,4 +39,13 @@ class SalesController extends Controller
 
         return view('admin.sale.show', compact('sale'));
     }
+
+    public function losses()
+    {
+        abort_if(Gate::denies('sale_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+
+
+        return view('admin.sale.losses');
+    }
 }

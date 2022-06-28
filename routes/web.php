@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         ->name('admin.import.sales');
 
     // Sales
+    Route::get('sales/losses',[SalesController::class,'losses'])->name('admin.sales.losses');
     Route::resource('sales', SalesController::class, ['except' => ['store', 'update', 'destroy']]);
 
 });
