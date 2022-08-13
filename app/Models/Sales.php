@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
-use App\Support\HasAdvancedFilter;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use \DateTimeInterface;
+use App\Models\TransactionType;
+use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sales extends Model
 {
@@ -58,6 +60,11 @@ class Sales extends Model
         return $this->belongsTo(Finished::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(TransactionType::class,'transaction_type');
+    }
+
     public function getDateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('project.date_format')) : null;
@@ -68,10 +75,6 @@ class Sales extends Model
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('project.date_format'), $value)->format('Y-m-d') : null;
     }
 
-//    public function setProfitAttribute($value)
-//    {
-//        $this->attributes['profit'] = $this->getProfitAttribute();
-//    }
 
     public function branch()
     {
@@ -84,30 +87,31 @@ class Sales extends Model
     }
 
 
-//    public function getTotalCostsAttribute()
-//    {
-//        return $this->item->cost_per_unit * $this->qty;
-//    }
+
     public function getTotalSalesAttribute()
     {
         return $this->item->sale_price * $this->qty;
     }
-//    public function getProfitAttribute()
-//    {
-//        return $this->total_sales - $this->costs;
-//    }
 
     protected static function boot()
     {
         parent::boot();
         static::created(function (Sales $sale) {
-
-//            dd($sale->total_sales);
             $sale->costs = $sale->item->cost_per_unit * $sale->qty;
             $sale->profit = $sale->selling_price - $sale->costs;
             $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
             $sale->save();
         });
+    }
+
+    public function scopeIsSales(Builder $query)
+    {
+        return $query->where('transaction_type','=',1);
+    }
+    
+    public function scopeIsNotSales(Builder $query)
+    {
+        return $query->where('transaction_type','!=',1);
     }
 
 

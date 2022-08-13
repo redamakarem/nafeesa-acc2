@@ -35,7 +35,7 @@
     </div>
 
 
-    <div class="card-controls">
+    {{-- <div class="card-controls">
         <div class="w-full">
             <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
                 <label class="form-label required" for="date">From Date</label>
@@ -108,7 +108,7 @@
                 <div>{{$total_profit}}</div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div wire:loading.delay>
         Loading...
@@ -153,39 +153,43 @@
                         @include('components.table.sort', ['field' => 'branch.title_en'])
                     </th>
                     <th>
+                        {{ trans('cruds.sale.fields.transaction_type') }}
+                        @include('components.table.sort', ['field' => 'transaction_type.name_en'])
+                    </th>
+                    <th>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($sales as $sale)
+                @forelse($others as $other)
                     <tr>
                         <td>
-                            <input type="checkbox" value="{{ $sale->id }}" wire:model="selected">
+                            <input type="checkbox" value="{{ $other->id }}" wire:model="selected">
                         </td>
                         <td>
-                            <a href="{{route('admin.finisheds.show',$sale->item->id)}}">{{ $sale->item->item_code }}</a>
+                            <a href="{{route('admin.finisheds.show',$other->item->id)}}">{{ $other->item->item_code }}</a>
                         </td>
                         <td>
-                            @if($sale->item)
-                                <span class="badge badge-relationship">{{ $sale->item->name_en ?? '' }}</span>
+                            @if($other->item)
+                                <span class="badge badge-relationship">{{ $other->item->name_en ?? '' }}</span>
                             @endif
                         </td>
                         <td>
-                            {{ $sale->qty }}
+                            {{ $other->qty }}
                         </td>
                         <td>
                             <div x-data="{ open: false }">
-                                <button class="badge badge-relationship" @click="open = true">{{ number_format($sale->costs,3) }}</button>
+                                <button class="badge badge-relationship" @click="open = true">{{ number_format($other->costs,3) }}</button>
 
                                 <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,.5);" x-show="open">
                                     <div class="text-left bg-white h-auto p-4 md:max-w-xl md:p-6 lg:p-8 shadow-xl rounded mx-2 md:mx-0" @click.away="open = false">
                                         <h2 class="text-2xl">Costs Details</h2>
                                         <ul class="list-decimal m-4">
-                                            <li>Raw Materials: {{($sale->item->total_raw_materials_cost/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>Labor: {{($sale->item->labor_costs/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>Semi Finished: {{($sale->item->semi_finished_quantity_total/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>AMOH: {{$sale->item->shared_costs}}</li>
-                                            <li>Related Costs: {{$sale->item->total_related_costs}}</li>
+                                            <li>Raw Materials: {{($other->item->total_raw_materials_cost/$other->item->kilos_per_dough) * $other->qty}}</li>
+                                            <li>Labor: {{($other->item->labor_costs/$other->item->kilos_per_dough) * $other->qty}}</li>
+                                            <li>Semi Finished: {{($other->item->semi_finished_quantity_total/$other->item->kilos_per_dough) * $other->qty}}</li>
+                                            <li>AMOH: {{$other->item->shared_costs}}</li>
+                                            <li>Related Costs: {{$other->item->total_related_costs}}</li>
                                         </ul>
                                         <div class="flex justify-center mt-8">
                                             <button class="bg-gray-700 text-white px-4 py-2 rounded no-outline focus:shadow-outline select-none" @click="open = false">Close</button>
@@ -201,33 +205,38 @@
 
                         </td>
                         <td>
-                            {{ number_format($sale->selling_price,3) }}
+                            {{ number_format($other->selling_price,3) }}
                         </td>
                         <td>
-                            {{ number_format($sale->profit,3) }}
+                            {{ number_format($other->profit,3) }}
                         </td>
                         <td>
-                            {{ $sale->date }}
+                            {{ $other->date }}
                         </td>
                         <td>
-                            @if($sale->branch)
-                                <span class="badge badge-relationship">{{ $sale->branch->title_en ?? '' }}</span>
+                            @if($other->branch)
+                                <span class="badge badge-relationship">{{ $other->branch->title_en ?? '' }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($other->transaction_type)
+                                <span class="badge badge-relationship">{{ $other->type->name_en ?? '' }}</span>
                             @endif
                         </td>
                         <td>
                             <div class="flex justify-end">
                                 @can('sale_show')
-                                    <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.sales.show', $sale) }}">
+                                    <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.sales.show', $other) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
                                 @can('sale_edit')
-                                    <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.sales.edit', $sale) }}">
+                                    <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.sales.edit', $other) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
                                 @can('sale_delete')
-                                    <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $sale->id }})" wire:loading.attr="disabled">
+                                    <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $other->id }})" wire:loading.attr="disabled">
                                         {{ trans('global.delete') }}
                                     </button>
                                 @endcan
@@ -254,7 +263,7 @@
                     {{ __('Entries selected') }}
                 </p>
             @endif
-            {{ $sales->links() }}
+            {{ $others->links() }}
         </div>
     </div>
 </div>

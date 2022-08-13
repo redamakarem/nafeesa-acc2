@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Sale;
 use App\Models\Branch;
 use App\Models\Finished;
 use App\Models\Sales;
+use App\Models\TransactionType;
 use Livewire\Component;
 
 class Edit extends Component
@@ -13,7 +14,7 @@ class Edit extends Component
 
     public array $listsForFields = [];
 
-    public function mount(Sale $sale)
+    public function mount(Sales $sale)
     {
         $this->sale = $sale;
         $this->initListsForFields();
@@ -54,6 +55,11 @@ class Edit extends Component
                 'exists:branches,id',
                 'required',
             ],
+            'sale.transaction_type' => [
+                'integer',
+                'exists:transaction_types,id',
+                'required',
+            ],
         ];
     }
 
@@ -61,5 +67,6 @@ class Edit extends Component
     {
         $this->listsForFields['item']   = Finished::pluck('name_en', 'id')->toArray();
         $this->listsForFields['branch'] = Branch::pluck('title_en', 'id')->toArray();
+        $this->listsForFields['transaction_type'] = TransactionType::pluck('name_en', 'id')->toArray();
     }
 }

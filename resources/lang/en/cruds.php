@@ -333,6 +333,8 @@ return [
             'deleted_at_helper' => ' ',
             'branch'            => 'Branch',
             'branch_helper'     => ' ',
+            'transaction_type'            => 'Transaction Type',
+            'transaction_type_helper'     => ' ',
         ],
     ],
 ];

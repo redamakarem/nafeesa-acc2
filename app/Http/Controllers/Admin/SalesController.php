@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Sale;
 use Gate;
+use App\Models\Sale;
+use App\Models\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 
 class SalesController extends Controller
 {
@@ -43,9 +44,11 @@ class SalesController extends Controller
     public function losses()
     {
         abort_if(Gate::denies('sale_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-
-
         return view('admin.sale.losses');
+    }
+    public function other()
+    {
+        abort_if(Gate::denies('sale_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.sale.other');
     }
 }

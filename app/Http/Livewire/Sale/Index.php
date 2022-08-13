@@ -112,35 +112,23 @@ class Index extends Component
 
     public function render()
     {
-        $query = Sales::with(['item', 'branch'])->advancedFilter([
+        $query = Sales::with(['item', 'branch'])->isSales()->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
-//
-//
-//
-//        $sales = $query->paginate($this->perPage);
-
-//        return view('livewire.sale.index', compact('query', 'sales'));
-
-//        $query = Sales::query();
         $query = $query->whereBetween('date',[$this->start_date,$this->end_date]);
         $query = $query->when($this->from_id,function ($q){
             return $q->whereHas('item',function ($qq){
                return $qq->where('item_code','>=',$this->from_id);
             });
-//           return $q->where('item_id','>=',$this->from_id);
         });
         $query = $query->when($this->to_id,function ($q){
             return $q->whereHas('item',function ($qq){
                 return $qq->where('item_code','<',$this->to_id);
             });
-            //           return $q->where('item_id','<',$this->to_id);
         });
-//        $query = $query->whereHas('item',function ($q){
-//           return $q->whereBetween('item_code',[$this->from_id,$this->to_id]);
-//        });
+
         if (count($this->branch_filters)>0){
 
             $query->whereIn('branch_id',$this->branch_filters);

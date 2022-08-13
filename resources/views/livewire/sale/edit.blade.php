@@ -40,6 +40,16 @@
             {{ trans('cruds.sale.fields.branch_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('sale.transaction_type') ? 'invalid' : '' }}">
+        <label class="form-label required" for="branch">{{ trans('cruds.sale.fields.transaction_type') }}</label>
+        <x-select-list class="form-control" required id="transaction_type" name="transaction_type" :options="$this->listsForFields['transaction_type']" wire:model="sale.transaction_type" />
+        <div class="validation-message">
+            {{ $errors->first('sale.transaction_type') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.sale.fields.transaction_type_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

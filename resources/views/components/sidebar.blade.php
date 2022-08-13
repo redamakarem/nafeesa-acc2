@@ -115,6 +115,15 @@
                                         </a>
                                     </li>
                                 @endcan
+                                @can('sale_access')
+                                    <li class="items-center">
+                                        <a class="{{ request()->is("admin/sales/other*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.sales.other") }}">
+                                            <i class="fa-fw c-sidebar-nav-icon fas fa-briefcase">
+                                            </i>
+                                            Other
+                                        </a>
+                                    </li>
+                                @endcan
 
                         </ul>
                     </li>
