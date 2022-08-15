@@ -113,6 +113,14 @@ class Sales extends Model
     {
         return $query->where('transaction_type','!=',1);
     }
+    public function scopeIsZeroCost(Builder $query)
+    {
+        return $query->where('costs','<=',0);
+    }
+    public function scopeIsZeroSalePrice(Builder $query)
+    {
+        return $query->where('selling_price','<=',0);
+    }
 
 
 }
