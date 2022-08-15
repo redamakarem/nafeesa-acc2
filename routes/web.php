@@ -1,23 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admin\BEPCController;
-use App\Http\Controllers\Admin\BranchController;
-use App\Http\Controllers\Admin\FinishedController;
-use App\Http\Controllers\Admin\FixedAssetController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\LaborController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RawMaterialController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SalesController;
-use App\Http\Controllers\Admin\SemiFinishedController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\UnitController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\UserProfileController;
 use Carbon\Carbon;
+use App\Models\Sales;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BEPCController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LaborController;
+use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\FinishedController;
+use App\Http\Controllers\Admin\FixedAssetController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\Admin\RawMaterialController;
+use App\Http\Controllers\Admin\SemiFinishedController;
 
 Route::mediaLibrary();
 
@@ -26,6 +27,12 @@ Route::redirect('/', '/login');
 Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+
+    Route::get('config/separate-sales',function(){
+        Sales::isSales()->isZeroSalePrice()->whereNotIn('item_id',[27])->update(['transaction_type' =>3]);
+        return 'Done';
+    });
+
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // Permissions
