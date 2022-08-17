@@ -89,7 +89,7 @@ class Losses extends Component
 
     public function render()
     {
-        $query = Sales::with(['item', 'branch'])->where('profit','<',0)->advancedFilter([
+        $query = Sales::with(['item', 'branch'])->isSales()->where('profit','<',0)->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
