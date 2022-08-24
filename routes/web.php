@@ -80,9 +80,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         ->name('admin.import.raw-materials');
     Route::get('import/sales', [\App\Http\Controllers\Admin\ImportController::class,'sales'])
         ->name('admin.import.sales');
+    Route::get('import/sales-new', [\App\Http\Controllers\Admin\ImportController::class,'sales_new'])
+        ->name('admin.import.sales-new');
 
     // Sales
     Route::get('sales/losses',[SalesController::class,'losses'])->name('admin.sales.losses');
+    Route::get('sales/loss-items',[SalesController::class,'lossItems'])->name('admin.sales.lossItems');
     Route::get('sales/other',[SalesController::class,'other'])->name('admin.sales.other');
     Route::resource('sales', SalesController::class, ['except' => ['store', 'update', 'destroy']]);
 

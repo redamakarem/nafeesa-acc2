@@ -15,4 +15,8 @@ class ImportController extends Controller
     {
         return view('admin.imports.sales');
     }
+    public function sales_new(Request $request)
+    {
+        return view('admin.imports.sales-new');
+    }
 }

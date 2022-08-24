@@ -106,12 +106,30 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("admin/import/sales-new*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.import.sales-new") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-briefcase">
+                                        </i>
+                                        ImportV2
+                                    </a>
+                                </li>
+                            @endcan
                                 @can('sale_access')
                                     <li class="items-center">
                                         <a class="{{ request()->is("admin/sales/losses*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.sales.losses") }}">
                                             <i class="fa-fw c-sidebar-nav-icon fas fa-briefcase">
                                             </i>
                                             Losses
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('sale_access')
+                                    <li class="items-center">
+                                        <a class="{{ request()->is("admin/sales/loss-iems*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.sales.lossItems") }}">
+                                            <i class="fa-fw c-sidebar-nav-icon fas fa-briefcase">
+                                            </i>
+                                            Loss Items
                                         </a>
                                     </li>
                                 @endcan
