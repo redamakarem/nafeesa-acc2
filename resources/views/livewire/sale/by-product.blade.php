@@ -103,7 +103,7 @@
 
 
                             <div x-data="{ open: false }">
-                                <button class="badge badge-relationship" @click="open = true">{{ number_format(($sale->item->cost_per_unit * $sale->qty),3) }}</button>
+                                <button class="badge badge-relationship" @click="open = true">{{ number_format(($sale->costs),3) }}</button>
 
                                 <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,.5);" x-show="open">
                                     <div class="text-left bg-white h-auto p-4 md:max-w-xl md:p-6 lg:p-8 shadow-xl rounded mx-2 md:mx-0" @click.away="open = false">
