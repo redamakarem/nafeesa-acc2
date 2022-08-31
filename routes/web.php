@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('sales/losses',[SalesController::class,'losses'])->name('admin.sales.losses');
     Route::get('sales/loss-items',[SalesController::class,'lossItems'])->name('admin.sales.lossItems');
     Route::get('sales/other',[SalesController::class,'other'])->name('admin.sales.other');
+    Route::get('ppp',[SalesController::class,'by_product'])->name('ppp');
     Route::resource('sales', SalesController::class, ['except' => ['store', 'update', 'destroy']]);
 
 });
@@ -105,13 +106,15 @@ Route::get('dates',function (){
     return Carbon::parse('2021-12-01')->dayOfWeek;
 });
 Route::get('update-sales',function (){
-
-    foreach (\App\Models\Sales::all() as $sale){
-        $sale->costs = $sale->item->cost_per_unit * $sale->qty;
-        $sale->profit = $sale->selling_price - $sale->costs;
-        $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
-        $sale->save();
-    }
+    \App\Models\Sales::all()->chunk(200,function($sales){
+        foreach ($sales as $sale){
+            $sale->costs = $sale->item->cost_per_unit * $sale->qty;
+            $sale->profit = $sale->selling_price - $sale->costs;
+            $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
+            $sale->save();
+        }
+    });
+    
     return "Done";
 });
 
