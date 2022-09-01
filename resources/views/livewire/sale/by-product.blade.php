@@ -109,11 +109,11 @@
                                     <div class="text-left bg-white h-auto p-4 md:max-w-xl md:p-6 lg:p-8 shadow-xl rounded mx-2 md:mx-0" @click.away="open = false">
                                         <h2 class="text-2xl">Costs Details</h2>
                                         <ul class="list-decimal m-4">
-                                            <li>Raw Materials: {{($sale->item->total_raw_materials_cost/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>Labor: {{($sale->item->labor_costs/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>Semi Finished: {{($sale->item->semi_finished_quantity_total/$sale->item->kilos_per_dough) * $sale->qty}}</li>
-                                            <li>AMOH: {{$sale->item->shared_costs}}</li>
-                                            <li>Related Costs: {{$sale->item->total_related_costs}}</li>
+                                            <li>Raw Materials: {{($sale->item->total_raw_materials_cost/$sale->item->kilos_per_dough) * $sale->total}}</li>
+                                            <li>Labor: {{($sale->item->labor_costs/$sale->item->kilos_per_dough) * $sale->total}}</li>
+                                            <li>Semi Finished: {{($sale->item->semi_finished_quantity_total/$sale->item->kilos_per_dough) * $sale->total}}</li>
+                                            <li>AMOH: {{$sale->item->shared_costs * $sale->total}}</li>
+                                            <li>Related Costs: {{$sale->item->total_related_costs * $sale->total}}</li>
                                         </ul>
                                         <div class="flex justify-center mt-8">
                                             <button class="bg-gray-700 text-white px-4 py-2 rounded no-outline focus:shadow-outline select-none" @click="open = false">Close</button>
