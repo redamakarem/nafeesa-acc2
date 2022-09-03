@@ -88,7 +88,8 @@ class ByProduct extends Component
     public function render()
     {
         $query = Sales::with(['item', 'branch'])->isSales()->groupBy('item_id')
-        ->selectRaw('count(*) as total, SUM(costs) as costs,SUM(profit) as profits, SUM(selling_price) as totalsales,item_id')->orderBy('total','DESC');
+        ->select(DB::raw('count(*) as total, SUM(costs) as costs,SUM(profit) as profits, SUM(selling_price) as totalsales,item_id'))->orderBy('total','DESC');
+        
         //     ->advancedFilter([
         //     's'               => $this->search ?: null,
         //     'order_column'    => $this->sortBy,
