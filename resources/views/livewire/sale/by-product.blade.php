@@ -168,7 +168,7 @@
                                 {{ number_format($sale->selling_price, 3) }}
                             </td>
                             <td>
-                                {{ number_format($sale->selling_price - $sale->costs, 3) }}
+                                {{ number_format($sale->selling_price - ($sale->item->cost_per_unit * $sale->total), 3) }}
                             </td>
                             
                             {{-- <td>
