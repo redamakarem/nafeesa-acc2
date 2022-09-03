@@ -81,9 +81,10 @@ class ByProduct extends Component
         $this->query=null;
 
         $this->format = 'xlsx';
-        $now = Carbon::now()->toDateString();
-        $this->start_date = $now;
-        $this->end_date = $now;
+        $starting = Carbon::now()->subMonths(5)->toDateString();
+        $ending = Carbon::now()->toDateString();
+        $this->start_date = $starting;
+        $this->end_date = $ending;
     }
 
     public function test()
@@ -104,6 +105,7 @@ class ByProduct extends Component
         $this->query = $this->query->whereBetween('date',[$this->start_date,$this->end_date]);
         $qq = $this->query;
         $sales = $this->query->paginate($this->perPage);
+        dd($sales);
         return view('livewire.sale.by-product', compact('qq', 'sales'));
 
     }
