@@ -61,6 +61,9 @@
                     {{ trans('cruds.sale.fields.date_helper') }}
                 </div>
             </div>
+            <div class="form-group">
+                <button wire:click="test"></button>
+            </div>
         </div>
     </div>
 

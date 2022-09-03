@@ -85,9 +85,15 @@ class ByProduct extends Component
         $this->start_date = $now;
         $this->end_date = $now;
     }
+
+    public function test()
+    {
+        dd($this->query->get());
+    }
+
     public function render()
     {
-        $query = Sales::with(['item', 'branch'])->isSales()->groupBy('item_id')
+        $this->query = Sales::with(['item', 'branch'])->isSales()->groupBy('item_id')
         ->select(DB::raw('count(*) as total, SUM(costs) as costs,SUM(profit) as profits, SUM(selling_price) as totalsales,item_id'))->orderBy('total','DESC');
         
         //     ->advancedFilter([
@@ -95,9 +101,10 @@ class ByProduct extends Component
         //     'order_column'    => $this->sortBy,
         //     'order_direction' => $this->sortDirection,
         // ]);
-        $query = $query->whereBetween('date',[$this->start_date,$this->end_date]);
-        $sales = $query->paginate($this->perPage);
-        return view('livewire.sale.by-product', compact('query', 'sales'));
+        $this->query = $this->query->whereBetween('date',[$this->start_date,$this->end_date]);
+        $qq = $this->query;
+        $sales = $this->query->paginate($this->perPage);
+        return view('livewire.sale.by-product', compact('qq', 'sales'));
 
     }
 
