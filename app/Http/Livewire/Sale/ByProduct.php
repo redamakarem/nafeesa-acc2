@@ -96,7 +96,6 @@ class ByProduct extends Component
         // ]);
         $query = $query->whereBetween('date',[$this->start_date,$this->end_date]);
         $sales = $query->paginate($this->perPage);
-        dd($sales);
         return view('livewire.sale.by-product', compact('query', 'sales'));
 
     }
