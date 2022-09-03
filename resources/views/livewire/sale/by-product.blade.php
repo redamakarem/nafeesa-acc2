@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button wire:click="test"></button>
+                <button wire:click="test">TEST</button>
             </div>
         </div>
     </div>
