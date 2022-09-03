@@ -87,8 +87,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('sales/losses',[SalesController::class,'losses'])->name('admin.sales.losses');
     Route::get('sales/loss-items',[SalesController::class,'lossItems'])->name('admin.sales.lossItems');
     Route::get('sales/other',[SalesController::class,'other'])->name('admin.sales.other');
-    Route::get('ppp',[SalesController::class,'by_product'])->name('ppp');
     Route::resource('sales', SalesController::class, ['except' => ['store', 'update', 'destroy']]);
+
+
+    // Reports
+    
+    Route::get('reports/pps',[SalesController::class,'by_product'])->name('reports.pps');
 
 });
 

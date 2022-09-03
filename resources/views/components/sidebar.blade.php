@@ -97,15 +97,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            {{-- @can('sale_access')
-                                <li class="items-center">
-                                    <a class="{{ request()->is("admin/sales-by-product*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("ppp") }}">
-                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
-                                        </i>
-                                        By Product
-                                    </a>
-                                </li>
-                            @endcan --}}
+                            
                             @can('sale_access')
                                 <li class="items-center">
                                     <a class="{{ request()->is("admin/import/sales*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.admin.import.sales") }}">
@@ -151,6 +143,15 @@
                                         </a>
                                     </li>
                                 @endcan
+                                @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("admin/reports/pps*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.pps") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        By Product
+                                    </a>
+                                </li>
+                            @endcan
 
                         </ul>
                     </li>

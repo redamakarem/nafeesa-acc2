@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Sale;
 
+use Carbon\Carbon;
 use App\Models\Sales;
 use Livewire\Component;
 use App\Exports\SalesExport;
 use Livewire\WithPagination;
 use Illuminate\Http\Response;
 use App\Http\Livewire\WithSorting;
-use App\Http\Livewire\WithConfirmation;
 use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\WithConfirmation;
 
 class ByProduct extends Component
 {
@@ -29,12 +30,12 @@ class ByProduct extends Component
 
     public array $paginationOptions;
 
-
-
-
     private $query;
 
     public $format;
+
+    public $start_date ;
+    public $end_date ;
 
 
     protected $queryString = [
@@ -80,6 +81,9 @@ class ByProduct extends Component
         $this->query=null;
 
         $this->format = 'xlsx';
+        $now = Carbon::now()->toDateString();
+        $this->start_date = $now;
+        $this->end_date = $now;
     }
     public function render()
     {
@@ -90,6 +94,7 @@ class ByProduct extends Component
         //     'order_column'    => $this->sortBy,
         //     'order_direction' => $this->sortDirection,
         // ]);
+        $query = $query->whereBetween('date',[$this->start_date,$this->end_date]);
         $sales = $query->paginate($this->perPage);
         return view('livewire.sale.by-product', compact('query', 'sales'));
 
