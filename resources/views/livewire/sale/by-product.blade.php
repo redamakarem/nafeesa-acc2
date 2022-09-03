@@ -165,10 +165,10 @@
 
                             </td>
                             <td>
-                                {{ number_format($sale->sum('selling_price'), 3) }}
+                                {{ number_format($sale->totalsales, 3) }}
                             </td>
                             <td>
-                                {{ number_format($sale->sum('selling_price') - ($sale->item->cost_per_unit * $sale->total), 3) }}
+                                {{ number_format($sale->totalsales - ($sale->item->cost_per_unit * $sale->total), 3) }}
                             </td>
                             
                             {{-- <td>
