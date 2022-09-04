@@ -160,7 +160,7 @@
                 @forelse($sales as $sale)
                     <tr>
                         <td>
-                            <input type="checkbox" value="{{ $sale->id }}" wire:model.debounce.2000ms="selected">
+                            <input type="checkbox" value="{{ $sale->id }}" wire:model="selected">
                         </td>
                         <td>
                             <a href="{{route('admin.finisheds.show',$sale->item->id)}}">{{ $sale->item->item_code }}</a>
