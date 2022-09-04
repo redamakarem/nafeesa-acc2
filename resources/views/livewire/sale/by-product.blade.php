@@ -96,6 +96,11 @@
                             {{ trans('cruds.sale.fields.costs') }}
                             @include('components.table.sort', ['field' => 'costs'])
                         </th>
+                        <th>RM</th>
+                        <th>LB</th>
+                        <th>SF</th>
+                        <th>MO</th>
+                        <th>RC</th>
                         <th>
                             {{ trans('cruds.sale.fields.sale_price') }}
                         </th>
@@ -167,6 +172,11 @@
 
 
                             </td>
+                            <td>{{ number_format(($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}</td>
+                            <td>{{ number_format(($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}</td>
+                            <td>{{ number_format(($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}</td>
+                            <td>{{ number_format($sale->shared_costs * $sale->pps_count($start_date,$end_date),3) }}</td>
+                            <td>{{ number_format($sale->total_related_costs * $sale->pps_count($start_date,$end_date),3) }}</td>
                              <td>
                                 {{ $sale->pps_sales($start_date,$end_date) }}
                             </td>
