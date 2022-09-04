@@ -265,8 +265,24 @@ class Finished extends Model implements HasMedia
 
     }
 
+    public function item_sales()
+    {
+        return $this->hasMany(Sales::class,'item_id');
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function pps_count($start_date,$end_date)
+    {
+        $result = Sales::isSales()->whereBetween('date',[$start_date,$end_date])->where('item_id',$this->id)->sum('qty');
+        return $result;
+    }
+    public function pps_sales($start_date,$end_date)
+    {
+        $result = Sales::isSales()->whereBetween('date',[$start_date,$end_date])->where('item_id',$this->id)->sum('selling_price');
+        return $result;
     }
 }

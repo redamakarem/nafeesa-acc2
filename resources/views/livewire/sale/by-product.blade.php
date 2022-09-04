@@ -116,22 +116,22 @@
                             </td>
                             <td>
                                 <a
-                                    href="{{ route('admin.finisheds.show', $sale->item->id) }}">{{ $sale->item->item_code }}</a>
+                                    href="{{ route('admin.finisheds.show', $sale->id) }}">{{ $sale->item_code }}</a>
                             </td>
                             <td>
-                                @if ($sale->item)
-                                    <span class="badge badge-relationship">{{ $sale->item->name_en ?? '' }}</span>
+                                @if ($sale)
+                                    <span class="badge badge-relationship">{{ $sale->name_en ?? '' }}</span>
                                 @endif
                             </td>
                             <td>
-                                {{ $sale->total }}
+                                {{ $sale->pps_count($start_date,$end_date) }}
                             </td>
                             <td>
 
 
                                 <div x-data="{ open: false }">
                                     <button class="badge badge-relationship"
-                                        @click="open = true">{{ number_format(($sale->item->cost_per_unit * $sale->total), 3) }}</button>
+                                        @click="open = true">{{ number_format(($sale->cost_per_unit * $sale->pps_count($start_date,$end_date)), 3) }}</button>
 
                                     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
                                         style="background-color: rgba(0,0,0,.5);" x-show="open">
@@ -140,17 +140,17 @@
                                             <h2 class="text-2xl">Costs Details</h2>
                                             <ul class="list-decimal m-4">
                                                 <li>Raw Materials:
-                                                    {{ number_format(($sale->item->total_raw_materials_cost / $sale->item->kilos_per_dough) * $sale->total,3) }}
+                                                    {{ number_format(($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}
                                                 </li>
                                                 <li>Labor:
-                                                    {{ number_format(($sale->item->labor_costs / $sale->item->kilos_per_dough) * $sale->total,3) }}
+                                                    {{ number_format(($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}
                                                 </li>
                                                 <li>Semi Finished:
-                                                    {{ number_format(($sale->item->semi_finished_quantity_total / $sale->item->kilos_per_dough) * $sale->total,3) }}
+                                                    {{ number_format(($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date),3) }}
                                                 </li>
-                                                <li>AMOH: {{ number_format($sale->item->shared_costs * $sale->total,3) }}</li>
+                                                <li>AMOH: {{ number_format($sale->shared_costs * $sale->pps_count($start_date,$end_date),3) }}</li>
                                                 <li>Related Costs:
-                                                    {{ number_format($sale->item->total_related_costs * $sale->total,3) }}</li>
+                                                    {{ number_format($sale->total_related_costs * $sale->pps_count($start_date,$end_date),3) }}</li>
                                             </ul>
                                             <div class="flex justify-center mt-8">
                                                 <button
@@ -167,12 +167,12 @@
 
 
                             </td>
-                            <td>
-                                {{ $sale->totalsales }}
+                             <td>
+                                {{ $sale->pps_sales($start_date,$end_date) }}
                             </td>
                             <td>
-                                {{ number_format($sale->totalsales - ($sale->item->cost_per_unit * $sale->total), 3) }}
-                            </td>
+                                {{ number_format($sale->pps_sales($start_date,$end_date) - ($sale->cost_per_unit * $sale->pps_count($start_date,$end_date)), 3) }}
+                            </td> 
                             
                             {{-- <td>
                             <div class="flex justify-end">

@@ -122,5 +122,15 @@ class Sales extends Model
         return $query->where('selling_price','<=',0);
     }
 
+    public function scopeBetweenDates(Builder $query, $start_date,$end_date)
+    {
+        return $query->whereBetween('date',[$start_date,$end_date]);
+    }
+
+    public function scopeByItemId(Builder $query, $item_id)
+    {
+        return $query->whereBetween('id',$item_id);
+    }
+
 
 }

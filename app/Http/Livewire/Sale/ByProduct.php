@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use App\Http\Livewire\WithSorting;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\WithConfirmation;
+use App\Models\Finished;
 
 class ByProduct extends Component
 {
@@ -94,18 +95,18 @@ class ByProduct extends Component
 
     public function render()
     {
-        $this->query = Sales::with(['item', 'branch'])->isSales()->groupBy('item_id')
-        ->select(DB::raw('count(*) as total, SUM(costs) as costs,SUM(profit) as profits, SUM(selling_price) as totalsales,item_id'))->orderBy('total','DESC');
+        $this->query = Finished::query();
+    // $this->query = $this->query->whereBetween('date',[$this->start_date,$this->end_date]);
+    $qq = $this->query;
+    $sales = $qq->paginate($this->perPage);
         
         //     ->advancedFilter([
         //     's'               => $this->search ?: null,
         //     'order_column'    => $this->sortBy,
         //     'order_direction' => $this->sortDirection,
         // ]);
-        $this->query = $this->query->whereBetween('date',[$this->start_date,$this->end_date]);
-        $qq = $this->query;
-        $sales = $this->query->paginate($this->perPage);
-        // dd($sales);
+        // $this->query = $this->query->whereBetween('date',[$this->start_date,$this->end_date]);
+        
         return view('livewire.sale.by-product', compact('qq', 'sales'));
 
     }
