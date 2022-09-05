@@ -89,6 +89,9 @@
                             @include('components.table.sort', ['field' => 'item.name_en'])
                         </th>
                         <th>
+                            Unit
+                        </th>
+                        <th>
                             {{ trans('cruds.sale.fields.qty') }}
                             @include('components.table.sort', ['field' => 'qty'])
                         </th>
@@ -115,6 +118,9 @@
                 </thead>
                 <tbody>
                     @forelse($sales as $sale)
+                    @if ($sale->pps_count($start_date,$end_date)>0)
+                        
+                    
                         <tr>
                             <td>
                                 <input type="checkbox" value="{{ $sale->id }}" wire:model="selected">
@@ -129,6 +135,11 @@
                                 @endif
                             </td>
                             <td>
+                                @if ($sale->unit)
+                                    <span class="badge badge-relationship">{{ $sale->unit->name_en ?? '' }}</span>
+                                @endif
+                            </td>
+                            <td>
                                 {{ $sale->pps_count($start_date,$end_date) }}
                             </td>
                             <td>
@@ -136,7 +147,11 @@
 
                                 <div x-data="{ open: false }">
                                     <button class="badge badge-relationship"
-                                        @click="open = true">{{ number_format(($sale->cost_per_unit * $sale->pps_count($start_date,$end_date)), 3) }}</button>
+                                        @click="open = true">{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date)) + 
+                                           (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date)) +
+                                           (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($start_date,$end_date)) + 
+                                           (($sale->shared_costs * $sale->pps_count($start_date,$end_date)) + 
+                                           ($sale->total_related_costs * $sale->pps_count($start_date,$end_date)) ), 3) }}</button>
 
                                     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
                                         style="background-color: rgba(0,0,0,.5);" x-show="open">
@@ -204,6 +219,7 @@
                             </div>
                         </td> --}}
                         </tr>
+                        @endif
                     @empty
                         <tr>
                             <td colspan="10">No entries found.</td>
