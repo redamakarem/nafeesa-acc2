@@ -4,16 +4,12 @@ namespace App\Exports;
 
 use App\Models\Sales;
 use Carbon\Carbon;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Response;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SalesExport implements FromQuery,WithMapping,WithHeadings, WithStyles,ShouldAutoSize

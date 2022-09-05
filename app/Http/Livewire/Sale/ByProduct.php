@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Sales;
 use Livewire\Component;
 use App\Exports\SalesExport;
+use App\Exports\SalesPerProductExport;
 use Livewire\WithPagination;
 use Illuminate\Http\Response;
 use App\Http\Livewire\WithSorting;
@@ -109,6 +110,11 @@ class ByProduct extends Component
         
         return view('livewire.sale.by-product', compact('qq', 'sales'));
 
+    }
+
+    public function export()
+    {
+        return (new SalesPerProductExport($this->start_date,$this->end_date))->download('sales-per-product.xlsx');
     }
 
     public function validateExportType()
