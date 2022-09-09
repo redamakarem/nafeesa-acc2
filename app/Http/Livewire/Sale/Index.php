@@ -164,6 +164,10 @@ class Index extends Component
         return $formats[$this->format];
     }
 
+    public function getSelectedRows()
+    {
+    }
+
     public function deleteSelected()
     {
         abort_if(Gate::denies('sale_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');

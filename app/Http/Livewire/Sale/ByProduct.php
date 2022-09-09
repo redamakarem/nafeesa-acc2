@@ -115,8 +115,9 @@ class ByProduct extends Component
     public function export()
     {
         return (new SalesPerProductExport($this->start_date,$this->end_date))->download('sales-per-product.xlsx');
+        return redirect(route('admin.reports.pps'));
     }
-    
+
 
     public function validateExportType()
     {

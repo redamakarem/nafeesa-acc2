@@ -107,6 +107,9 @@
                 <label class="form-label required" for="date">Total Profit</label>
                 <div>{{$total_profit}}</div>
             </div>
+            <div class="form-group">
+                <button wire:click="getSelectedRows">Refresh</button>
+            </div>
         </div>
     </div>
 
@@ -160,7 +163,7 @@
                 @forelse($sales as $sale)
                     <tr>
                         <td>
-                            <input type="checkbox" value="{{ $sale->id }}" wire:model="selected">
+                            <input type="checkbox" value="{{ $sale->id }}" wire:model.defer="selected">
                         </td>
                         <td>
                             <a href="{{route('admin.finisheds.show',$sale->item->id)}}">{{ $sale->item->item_code }}</a>
