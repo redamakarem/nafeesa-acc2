@@ -16,6 +16,12 @@ class FinishedController extends Controller
 
         return view('admin.finished.index');
     }
+    public function per_unit()
+    {
+        abort_if(Gate::denies('finished_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('admin.finished.per-unit');
+    }
 
     public function create()
     {

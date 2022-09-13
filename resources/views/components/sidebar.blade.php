@@ -214,6 +214,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('finished_access')
+                    <li class="items-center">
+                        <a class="{{ request()->is("admin/per-unit*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.finished.per-unit") }}">
+                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
+                            </i>
+                            {{ __('Per Unit') }}
+                        </a>
+                    </li>
+                @endcan
                 @can('fixed_asset_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/fixed-assets*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.fixed-assets.index") }}">

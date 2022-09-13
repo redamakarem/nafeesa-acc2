@@ -57,8 +57,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('labors', LaborController::class, ['except' => ['store', 'update', 'destroy']]);
 
 //    Finished
-
+    Route::get('per-unit',[FinishedController::class,'per_unit'])->name('finished.per-unit');
     Route::resource('finisheds', FinishedController::class, ['except' => ['store', 'update', 'destroy']]);
+
 
     // Fixed Assets
     Route::resource('fixed-assets', FixedAssetController::class, ['except' => ['store', 'update', 'destroy']]);
