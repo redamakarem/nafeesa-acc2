@@ -5,17 +5,15 @@ namespace App\Http\Livewire\Sale;
 use Carbon\Carbon;
 use App\Models\Sales;
 use Livewire\Component;
-use App\Exports\SalesPerProductExport;
+use App\Models\Finished;
 use Livewire\WithPagination;
 use Illuminate\Http\Response;
 use App\Http\Livewire\WithSorting;
+use App\Exports\SalesPerProductExport;
 use App\Http\Livewire\WithConfirmation;
-use App\Models\Finished;
 
-class ByProduct extends Component
+class ByDate extends Component
 {
-
-
     use WithPagination;
     use WithSorting;
     use WithConfirmation;
@@ -36,6 +34,9 @@ class ByProduct extends Component
 
     public $start_date ;
     public $end_date ;
+    public $selected_dates='';
+    public $dates_array = [];
+
 
 
     protected $queryString = [
@@ -109,26 +110,31 @@ class ByProduct extends Component
 
         return $formats[$this->format];
     }
-
+    
+    public function updatedSelectedDates($value)
+    {
+        $string = str_replace(' ', '', $value);
+        $this->dates_array = explode(',',$string);
+    }
+    
     public function render()
     {
+        $da = [];
+        if($this->selected_dates !=''){
+            $string = str_replace(' ', '', $this->selected_dates);
+        $this->dates_array = explode(',',$string);
+        $da = $this->dates_array;
+        // dd($da);
+        }
         $this->query = Finished::query()
         ->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
+
     $qq = $this->query;
-    // $sales = $qq->paginate($this->perPage);
-    $sales = $this->query->get()->filter(fn($sale)=>$sale->pps_count($this->start_date,$this->end_date)>0)->paginate($this->perPage);
-        
-        
-        
-        return view('livewire.sale.by-product', compact('qq', 'sales'));
-
+    $sales = $qq->paginate($this->perPage);
+        return view('livewire.sale.by-date',compact('qq', 'sales','da'));
     }
-
-
-
-    
 }

@@ -94,6 +94,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Reports
     
     Route::get('reports/pps',[SalesController::class,'by_product'])->name('reports.pps');
+    Route::get('reports/sales-by-date',[SalesController::class,'by_date'])->name('reports.sales-by-date');
 
 });
 

@@ -39,7 +39,7 @@
         <div class="w-full">
             <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
                 <label class="form-label required" for="date">From Date</label>
-                <x-date-picker class="form-control" required wire:model="start_date" id="start_date" name="date" picker="date" />
+                <x-date-picker class="form-control" required wire:model="start_date" id="start_date" name="date" picker="date" mode="single" />
                 <div class="validation-message">
                     {{ $errors->first('sale.date') }}
                 </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
                 <label class="form-label required" for="date">To Date</label>
-                <x-date-picker class="form-control" required wire:model="end_date" id="end_date" name="date" picker="date" />
+                <x-date-picker class="form-control" required wire:model="end_date" id="end_date" name="date" picker="date" mode="single" />
                 <div class="validation-message">
                     {{ $errors->first('sale.date') }}
                 </div>

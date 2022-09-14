@@ -31,10 +31,22 @@
 @this.set('{{ $attributes['wire:model'] }}', value)
     }
 
-@if($attributes['picker'] === 'date')
+@if($attributes['picker'] === 'date' && $attributes['mode'] === 'single')
         let el = flatpickr('.flatpickr-{{ $attributes['id'] }}', {
             dateFormat: "{{ config('project.flatpickr_date_format') }}",
             wrap: true,
+            onChange: (SelectedDates, DateStr, instance) => {
+                update(DateStr)
+            },
+            onReady: (SelectedDates, DateStr, instance) => {
+                update(DateStr)
+            }
+        })
+@elseif($attributes['picker'] === 'date' && $attributes['mode'] === 'multiple')
+        let el = flatpickr('.flatpickr-{{ $attributes['id'] }}', {
+            dateFormat: "{{ config('project.flatpickr_date_format') }}",
+            wrap: true,
+            mode: "multiple",
             onChange: (SelectedDates, DateStr, instance) => {
                 update(DateStr)
             },

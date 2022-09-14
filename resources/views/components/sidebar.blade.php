@@ -152,6 +152,15 @@
                                     </a>
                                 </li>
                             @endcan
+                                @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("reports/sales-by-date*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.sales-by-date") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        By Dates
+                                    </a>
+                                </li>
+                            @endcan
 
                         </ul>
                     </li>

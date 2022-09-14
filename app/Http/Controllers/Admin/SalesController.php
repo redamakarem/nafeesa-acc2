@@ -51,6 +51,11 @@ class SalesController extends Controller
         abort_if(Gate::denies('sale_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('admin.sale.by-product');
     }
+    public function by_date()
+    {
+        abort_if(Gate::denies('sale_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.sale.by-date');
+    }
 
     public function lossItems()
     {

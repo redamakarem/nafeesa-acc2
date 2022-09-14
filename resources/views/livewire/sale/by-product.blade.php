@@ -42,7 +42,7 @@
             <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
                 <label class="form-label required" for="date">From Date</label>
                 <x-date-picker class="form-control" required wire:model="start_date" id="start_date" name="date"
-                    picker="date" />
+                    picker="date" mode="single"/>
                 <div class="validation-message">
                     {{ $errors->first('sale.date') }}
                 </div>
@@ -53,7 +53,7 @@
             <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
                 <label class="form-label required" for="date">To Date</label>
                 <x-date-picker class="form-control" required wire:model="end_date" id="end_date" name="date"
-                    picker="date" />
+                    picker="date" mode="single"/>
                 <div class="validation-message">
                     {{ $errors->first('sale.date') }}
                 </div>
@@ -118,7 +118,7 @@
                 </thead>
                 <tbody>
                     @forelse($sales as $sale)
-                    @if ($sale->pps_count($start_date,$end_date)>0)
+                    {{-- @if ($sale->pps_count($start_date,$end_date)>0) --}}
                         
                     
                         <tr>
@@ -219,7 +219,7 @@
                             </div>
                         </td> --}}
                         </tr>
-                        @endif
+                        {{-- @endif --}}
                     @empty
                         <tr>
                             <td colspan="10">No entries found.</td>
