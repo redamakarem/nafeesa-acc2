@@ -122,7 +122,7 @@ class ByDate extends Component
     protected function initListsForFields(): void
     {
         
-        $this->listsForFields['finished'] = Finished::pluck('item_code', 'id')->toArray();
+        $this->listsForFields['finished'] = Finished::pluck('name_ar', 'id')->toArray();
 
     }
     
