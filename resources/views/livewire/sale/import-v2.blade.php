@@ -10,7 +10,7 @@
    
     <div class="form-group {{ $errors->has('selected_date') ? 'invalid' : '' }}">
         <label class="form-label required" for="date">{{ trans('cruds.sale.fields.date') }}</label>
-        <x-date-picker class="form-control" required wire:model="selected_date" id="date" name="date" picker="date" />
+        <x-date-picker class="form-control" required wire:model="selected_date" id="date" name="date" picker="date" mode="single" />
         <div class="validation-message">
             {{ $errors->first('selected_date') }}
         </div>
