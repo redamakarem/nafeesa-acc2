@@ -70,17 +70,42 @@
                                     <span class="badge badge-relationship">{{ $sale->name_en ?? '' }}</span>
                                 @endif
                             </td>
+                            
                             @foreach ($da as $item)
                             <td>
-                                <p>Q:{{ $sale->pps_count($item,$item) }}</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Q</th>
+                                        <th>S</th>
+                                        <th>C</th>
+                                        <th>P</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $sale->pps_count($item,$item) }}</td>
+                                        <td>{{ $sale->pps_sales($item,$item) }}</td>
+                                        <td>{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
+                                            (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) +
+                                            (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
+                                            (($sale->shared_costs * $sale->pps_count($item,$item)) + 
+                                            ($sale->total_related_costs * $sale->pps_count($item,$item)) ), 3) }}</td>
+                                            <td>{{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item)), 3) }}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </td>
+                                {{-- <p>Q:{{ $sale->pps_count($item,$item) }}</p>
                                 <p>S:{{ $sale->pps_sales($item,$item) }}</p>
                                 <p>C:{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
                                     (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) +
                                     (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
                                     (($sale->shared_costs * $sale->pps_count($item,$item)) + 
                                     ($sale->total_related_costs * $sale->pps_count($item,$item)) ), 3) }}</p>
-                            </td>
+                                    <p>P: {{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item)), 3) }}</p> --}}
+                            
                         @endforeach
+
+                    
                             
                             
                             {{-- <td>
