@@ -11,6 +11,16 @@
                     {{ trans('cruds.sale.fields.date_helper') }}
                 </div>
             </div>
+            <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
+                <label class="form-label required" for="date">Items</label>
+                <x-select-list class="form-control" id="finished_filters" name="finished_filters" wire:model="finished_filters" :options="$this->listsForFields['finished']" multiple />
+                <div class="validation-message">
+                    {{ $errors->first('sale.date') }}
+                </div>
+                <div class="help-block">
+                    {{ trans('cruds.sale.fields.date_helper') }}
+                </div>
+            </div>
             
         </div>
         
@@ -61,7 +71,15 @@
                                 @endif
                             </td>
                             @foreach ($da as $item)
-                            <td>{{ $sale->pps_count($item,$item) }}</td>
+                            <td>
+                                <p>Q:{{ $sale->pps_count($item,$item) }}</p>
+                                <p>S:{{ $sale->pps_sales($item,$item) }}</p>
+                                <p>C:{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
+                                    (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) +
+                                    (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
+                                    (($sale->shared_costs * $sale->pps_count($item,$item)) + 
+                                    ($sale->total_related_costs * $sale->pps_count($item,$item)) ), 3) }}</p>
+                            </td>
                         @endforeach
                             
                             

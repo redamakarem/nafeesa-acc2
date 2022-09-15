@@ -36,7 +36,8 @@ class ByDate extends Component
     public $end_date ;
     public $selected_dates='';
     public $dates_array = [];
-
+    public array $finished_filters = [];
+    public array $listsForFields = [];
 
 
     protected $queryString = [
@@ -78,7 +79,7 @@ class ByDate extends Component
         $this->sortDirection     = 'desc';
         $this->perPage           = 10;
         $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new Sales())->orderable;
+        $this->orderable         = (new Finished())->orderable;
         $this->query=null;
 
         $this->format = 'xlsx';
@@ -86,6 +87,7 @@ class ByDate extends Component
         $ending = Carbon::now()->toDateString();
         $this->start_date = $starting;
         $this->end_date = $ending;
+        $this->initListsForFields();
     }
 
     public function test()
@@ -116,6 +118,13 @@ class ByDate extends Component
         $string = str_replace(' ', '', $value);
         $this->dates_array = explode(',',$string);
     }
+
+    protected function initListsForFields(): void
+    {
+        
+        $this->listsForFields['finished'] = Finished::pluck('item_code', 'id')->toArray();
+
+    }
     
     public function render()
     {
@@ -124,17 +133,23 @@ class ByDate extends Component
             $string = str_replace(' ', '', $this->selected_dates);
         $this->dates_array = explode(',',$string);
         $da = $this->dates_array;
-        // dd($da);
         }
-        $this->query = Finished::query()
+
+        $query = Finished::query()
+
         ->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
+        if (count($this->finished_filters)>0){
 
-    $qq = $this->query;
-    $sales = $qq->paginate($this->perPage);
-        return view('livewire.sale.by-date',compact('qq', 'sales','da'));
+            $query->whereIn('id',$this->finished_filters);
+        }
+
+    $this->query = $query;
+    $sales = $query->paginate($this->perPage);
+    // dd($sales);
+        return view('livewire.sale.by-date',compact('query', 'sales','da'));
     }
 }
