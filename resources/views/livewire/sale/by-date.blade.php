@@ -21,6 +21,16 @@
                     {{ trans('cruds.sale.fields.date_helper') }}
                 </div>
             </div>
+            <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
+                <label class="form-label required" for="date">Branches</label>
+                <x-select-list class="form-control" id="branch_filters" name="branch_filters" wire:model="branch_filters" :options="$this->listsForFields['branch_filters']" multiple />
+                <div class="validation-message">
+                    {{ $errors->first('sale.date') }}
+                </div>
+                <div class="help-block">
+                    {{ trans('cruds.sale.fields.date_helper') }}
+                </div>
+            </div>
             
         </div>
         
@@ -54,7 +64,7 @@
                 </thead>
                 <tbody>
                     @forelse($sales as $sale)
-                    @if ($sale->pps_count($start_date,$end_date)>0)
+                    @if ($sale->pps_count($start_date,$end_date,$branch_filters)>0)
                         
                     
                         <tr>
@@ -82,26 +92,26 @@
                                         <th>P</th>
                                     </tr>
                                     <tr>
-                                        <td>{{ $sale->pps_count($item,$item) }}</td>
+                                        <td>{{ $sale->pps_count($item,$item,$branch_filters) }}</td>
                                         <td>{{ $sale->pps_sales($item,$item) }}</td>
-                                        <td>{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
-                                            (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) +
-                                            (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
-                                            (($sale->shared_costs * $sale->pps_count($item,$item)) + 
-                                            ($sale->total_related_costs * $sale->pps_count($item,$item)) ), 3) }}</td>
-                                            <td>{{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item)), 3) }}</td>
+                                        <td>{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item,$branch_filters)) + 
+                                            (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item,$branch_filters)) +
+                                            (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item,$branch_filters)) + 
+                                            (($sale->shared_costs * $sale->pps_count($item,$item,$branch_filters)) + 
+                                            ($sale->total_related_costs * $sale->pps_count($item,$item,$branch_filters)) ), 3) }}</td>
+                                            <td>{{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item,$branch_filters)), 3) }}</td>
                                     </tr>
                                 </thead>
                             </table>
                         </td>
-                                {{-- <p>Q:{{ $sale->pps_count($item,$item) }}</p>
+                                {{-- <p>Q:{{ $sale->pps_count($item,$item,$branch_filters) }}</p>
                                 <p>S:{{ $sale->pps_sales($item,$item) }}</p>
-                                <p>C:{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
-                                    (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) +
+                                <p>C:{{ number_format((($sale->total_raw_materials_cost / $sale->kilos_per_dough) * $sale->pps_count($item,$item,$branch_filters)) + 
+                                    (($sale->labor_costs / $sale->kilos_per_dough) * $sale->pps_count($item,$item,$branch_filters)) +
                                     (($sale->semi_finished_quantity_total / $sale->kilos_per_dough) * $sale->pps_count($item,$item)) + 
-                                    (($sale->shared_costs * $sale->pps_count($item,$item)) + 
-                                    ($sale->total_related_costs * $sale->pps_count($item,$item)) ), 3) }}</p>
-                                    <p>P: {{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item)), 3) }}</p> --}}
+                                    (($sale->shared_costs * $sale->pps_count($item,$item,$branch_filters)) + 
+                                    ($sale->total_related_costs * $sale->pps_count($item,$item,$branch_filters)) ), 3) }}</p>
+                                    <p>P: {{ number_format($sale->pps_sales($item,$item) - ($sale->cost_per_unit * $sale->pps_count($item,$item,$branch_filters)), 3) }}</p> --}}
                             
                         @endforeach
 

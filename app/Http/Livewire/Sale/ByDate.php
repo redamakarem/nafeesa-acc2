@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Sale;
 
 use Carbon\Carbon;
 use App\Models\Sales;
+use App\Models\Branch;
 use Livewire\Component;
 use App\Models\Finished;
 use Livewire\WithPagination;
@@ -37,6 +38,7 @@ class ByDate extends Component
     public $selected_dates='';
     public $dates_array = [];
     public array $finished_filters = [];
+    public array $branch_filters = [];
     public array $listsForFields = [];
 
 
@@ -123,6 +125,7 @@ class ByDate extends Component
     {
         
         $this->listsForFields['finished'] = Finished::pluck('name_ar', 'id')->toArray();
+        $this->listsForFields['branch_filters'] = Branch::pluck('title_en', 'id')->toArray();
 
     }
     
@@ -146,6 +149,7 @@ class ByDate extends Component
 
             $query->whereIn('id',$this->finished_filters);
         }
+       
 
     $this->query = $query;
     $sales = $query->paginate($this->perPage);

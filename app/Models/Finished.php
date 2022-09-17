@@ -275,10 +275,15 @@ class Finished extends Model implements HasMedia
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function pps_count($start_date,$end_date)
+    public function pps_count($start_date,$end_date,$branches)
     {
-        $result = Sales::isSales()->whereBetween('date',[$start_date,$end_date])->where('item_id',$this->id)->sum('qty');
-        return $result;
+        $query=null;
+        if($branches ==[]){
+            $query = Sales::isSales()->whereBetween('date',[$start_date,$end_date])->where('item_id',$this->id)->sum('qty');
+        }else{
+            $query = Sales::isSales()->whereBetween('date',[$start_date,$end_date])->where('item_id',$this->id)->whereIn('branch_id',$branches)->sum('qty');
+        }
+        return $query;
     }
     public function pps_sales($start_date,$end_date)
     {
