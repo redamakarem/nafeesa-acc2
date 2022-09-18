@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\RawMaterialController;
 use App\Http\Controllers\Admin\SemiFinishedController;
+use App\Http\Controllers\LoyaltyItemController;
 
 Route::mediaLibrary();
 
@@ -49,6 +50,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Unit
     Route::resource('units', UnitController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Loyalty items
+    Route::resource('loyalty-items', LoyaltyItemController::class, ['only' => ['index','create', 'delete']]);
 
     // Semi Finished
     Route::resource('semi-finisheds', SemiFinishedController::class, ['except' => ['store', 'update', 'destroy']]);

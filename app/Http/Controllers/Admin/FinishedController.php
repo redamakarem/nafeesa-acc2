@@ -9,6 +9,7 @@ use App\Models\Finished;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Models\LoyaltyItem;
 
 class FinishedController extends Controller
 {
@@ -50,7 +51,7 @@ class FinishedController extends Controller
 
     public function update_costs($id)
     {
-        $sales = Sales::isSales()->where('item_id',203)->get();
+        $sales = Sales::isSales()->where('item_id',$id)->get();
 
 foreach ($sales as $sale){
             $sale->costs = $sale->item->cost_per_unit * $sale->qty;
@@ -58,7 +59,15 @@ foreach ($sales as $sale){
             $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
             $sale->save();
         }
-        return redirect(route('admin.finisheds.index'));
+        $loyalty_whitelist = LoyaltyItem::all()->pluck('item_id')->flatten()->toArray();
+        // dd($id,$loyalty_whitelist);
+        if(!in_array(intval($id),$loyalty_whitelist)){
+            $finished_item = Finished::findOrfail($id);
+            $finished_item->loyalty = $finished_item->sale_price * 0.03;
+            // dd($finished_item->sale_price);
+            $finished_item->save();
+        }
+        return redirect(route('admin.loyalty-items.index'));
 
     }
 }

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Finished;
+namespace App\Http\Livewire\LoyaltyItem;
 
-use App\Http\Livewire\WithConfirmation;
-use App\Http\Livewire\WithSorting;
-use App\Models\Finished;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
+use App\Models\Finished;
+use App\Models\LoyaltyItem;
 use Livewire\WithPagination;
+use Illuminate\Http\Response;
+use App\Http\Livewire\WithSorting;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Livewire\WithConfirmation;
 
 class Index extends Component
 {
@@ -73,28 +74,26 @@ class Index extends Component
     {
         abort_if(Gate::denies('finished_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        Finished::whereIn('id', $this->selected)->delete();
+        LoyaltyItem::whereIn('id', $this->selected)->delete();
 
         $this->resetSelected();
     }
 
-    public function delete(Finished $finished)
+    public function delete(LoyaltyItem $finished)
     {
         abort_if(Gate::denies('finished_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $finished->delete();
     }
-
     public function render()
-    {
-        $query = Finished::with(['rawMaterials', 'semiFinished', 'labor'])->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
-            'order_direction' => $this->sortDirection,
-        ]);
-
+    { 
+        $query = LoyaltyItem::with('item')->get();
+        // ->advancedFilter([
+        //     's'               => $this->search ?: null,
+        //     'order_column'    => $this->sortBy,
+        //     'order_direction' => $this->sortDirection,
+        // ]);
         $finisheds = $query->paginate($this->perPage);
-
-        return view('livewire.finished.index', compact('finisheds', 'query'));
+        return view('livewire.loyalty-item.index',compact('finisheds'));
     }
 }
