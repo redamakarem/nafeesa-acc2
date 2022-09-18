@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('labors', LaborController::class, ['except' => ['store', 'update', 'destroy']]);
 
 //    Finished
+    Route::get('update-costs/{id}',[FinishedController::class,'update_costs'])->name('finished.update-costs');
     Route::get('per-unit',[FinishedController::class,'per_unit'])->name('finished.per-unit');
     Route::resource('finisheds', FinishedController::class, ['except' => ['store', 'update', 'destroy']]);
 

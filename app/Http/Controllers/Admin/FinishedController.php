@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Finished;
 use Gate;
+use Carbon\Carbon;
+use App\Models\Sales;
+use App\Models\Finished;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 
 class FinishedController extends Controller
 {
@@ -44,5 +46,19 @@ class FinishedController extends Controller
         $finished->load('rawMaterials', 'semiFinished', 'labor');
 
         return view('admin.finished.show', compact('finished'));
+    }
+
+    public function update_costs($id)
+    {
+        $sales = Sales::isSales()->where('item_id',203)->get();
+
+foreach ($sales as $sale){
+            $sale->costs = $sale->item->cost_per_unit * $sale->qty;
+            $sale->profit = $sale->selling_price - $sale->costs;
+            $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
+            $sale->save();
+        }
+        return redirect(route('admin.finisheds.index'));
+
     }
 }
