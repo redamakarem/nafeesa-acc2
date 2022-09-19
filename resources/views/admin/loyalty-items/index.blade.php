@@ -11,7 +11,7 @@
 
                 @can('finished_create')
                     <a class="btn btn-indigo" href="{{ route('admin.loyalty-items.create') }}">
-                        {{ trans('global.add') }} {{ trans('cruds.finished.title_singular') }}
+                        {{ trans('global.add') }} NON LOYALTY
                     </a>
                 @endcan
             </div>

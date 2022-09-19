@@ -232,6 +232,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('finished_access')
+                    <li class="items-center">
+                        <a class="{{ request()->is("admin/loyalty-items*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.loyalty-items.index") }}">
+                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
+                            </i>
+                            {{ __('Non Loyalty') }}
+                        </a>
+                    </li>
+                @endcan
                 @can('fixed_asset_access')
                     <li class="items-center">
                         <a class="{{ request()->is("admin/fixed-assets*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.fixed-assets.index") }}">

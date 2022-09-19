@@ -32,7 +32,7 @@ class Create extends Component
 
         $this->loyaltyItem->save();
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('admin.loyalty-items.index');
     }
 
     protected function initListsForFields(): void

@@ -6,7 +6,7 @@
                 <div class="card-header-container">
                     <h6 class="card-title">
                         {{ trans('global.create') }}
-                        {{ trans('cruds.branch.title_singular') }}
+                        Loyalty Whitelist Item
                     </h6>
                 </div>
             </div>
