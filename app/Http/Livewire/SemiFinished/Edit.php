@@ -77,7 +77,7 @@ class Edit extends Component
 //        $this->semiFinished->outputs_per_kg = $this->semiFinished->kilos_per_dough;
 //        $this->semiFinished->production_loss_percent = 1-($this->semiFinished->kilos_per_dough/ $this->semiFinished->inputs_per_kg);
         $this->semiFinished->save();
-//        dd($this->mapRawMaterials($this->raw_materials));
+    //    dd($this->mapRawMaterials($this->raw_materials));
         $this->semiFinished->rawMaterials()->sync($this->mapRawMaterials($this->raw_materials));
         $this->semiFinished->labor()->sync($this->labors);
 
@@ -143,8 +143,9 @@ class Edit extends Component
         $rawMaterials = array_filter($rawMaterials);
 //        dd($rawMaterials);
         $result= collect($rawMaterials)->map(function ($i) {
-            if ($i !=null && $i>0 && $i!='0')
+            if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
+            }
         });
 
 //        dd($result);

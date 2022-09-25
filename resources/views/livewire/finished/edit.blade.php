@@ -95,7 +95,7 @@
                     <td>{{ $rm->name_en }} | {{ $rm->name_ar }}</td>
                     <td style="padding: 5px 0px">{{ $rm->unit->name_en }}</td>
                     <td style="padding: 5px 0px">{{ $rm->avg_cost }}</td>
-                    <td><input  {{ $rm->value ? null : 'disabled' }}  data-id="{{ $rm->id }}" wire:model.lazy="raw_materials.{{ $rm->id }}" type="text" class="rm-amount form-control" placeholder="Amount"></td>
+                    <td><input  {{ $rm->value ? null : 'disabled' }}  data-id="{{ $rm->id }}" wire:model="raw_materials.{{ $rm->id }}" type="text" class="rm-amount form-control" placeholder="Amount"></td>
                 </tr>
             @endforeach
         </table>
