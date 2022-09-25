@@ -87,7 +87,7 @@
                     <td>{{ $sf->name_en }} | {{ $sf->name_ar }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->unit->name_en }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->new_total_cost }}</td>
-                    <td><input  {{ $sf->semi ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:model.lazy="semi_finished.{{ $sf->id }}" type="text" class="sf-amount form-control" placeholder="Amount"></td>
+                    <td><input  {{ $sf->semi ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:ignore wire:model="semi_finished.{{ $sf->id }}" type="text" class="sf-amount form-control" placeholder="Amount"></td>
                 </tr>
             @endforeach
         </table>
@@ -232,10 +232,11 @@
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.sf-amount[data-id="' + id + '"]').attr('disabled', !enabled)
                 jQuery('.sf-amount[data-id="' + id + '"]').val(null)
-                // @this.clean_raw_materials()
+                let lvModel = jQuery('.sf-amount[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvModel,jQuery('.sf-amount[data-id="' + id + '"]').val())
             })
 
-            jQuery('.sf-amount').blur(function(){
+            jQuery('.rm-amount').blur(function(){
                 let lvModel = jQuery(this).attr('wire:model');
                 @this.set(lvModel,jQuery(this).val())
             })

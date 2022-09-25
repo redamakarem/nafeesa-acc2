@@ -16,7 +16,7 @@ class Edit extends Component
     public array $labors = [];
 
     public $sfs;
-    public $semi_finished;
+    public array $semi_finished = [];
 
     public array $listsForFields = [];
 
@@ -79,6 +79,7 @@ class Edit extends Component
         $this->semiFinished->save();
     //    dd($this->mapRawMaterials($this->raw_materials));
         $this->semiFinished->rawMaterials()->sync($this->mapRawMaterials($this->raw_materials));
+        $this->semiFinished->semiFinished()->sync($this->mapSemiFinished($this->semi_finished));
         $this->semiFinished->labor()->sync($this->labors);
 
         return redirect()->route('admin.semi-finisheds.index');
@@ -143,6 +144,21 @@ class Edit extends Component
         $rawMaterials = array_filter($rawMaterials);
 //        dd($rawMaterials);
         $result= collect($rawMaterials)->map(function ($i) {
+            if ($i !=null && $i>0 && $i!='0' && $i !=''){
+            return ['amount' => $i];
+            }
+        });
+
+//        dd($result);
+        return $result;
+
+    }
+    private function mapSemiFinished($semiFinished)
+    {
+        $semiFinished = array_filter($semiFinished, function($a) { return ($a !== 0); });
+        $semiFinished = array_filter($semiFinished);
+//        dd($semiFinished);
+        $result= collect($semiFinished)->map(function ($i) {
             if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
             }
