@@ -519,19 +519,19 @@
                                     <tbody class="text-sm divide-y divide-gray-100">
                                         <tr>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$semiFinished->total_raw_materials_cost}}</div>
+                                                <div class="text-left">{{number_format($semiFinished->total_raw_materials_cost,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$semiFinished->labor_costs}}</div>
+                                                <div class="text-left">{{number_format($semiFinished->labor_costs,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$semiFinished->semi_finished_quantity_total}}</div>
+                                                <div class="text-left">{{number_format($semiFinished->semi_finished_quantity_total,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$semiFinished->shared_costs}}</div>
+                                                <div class="text-left">{{number_format($semiFinished->shared_costs,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$semiFinished->finals_total}}</div>
+                                                <div class="text-left">{{number_format($semiFinished->finals_total,3)}}</div>
                                             </td>
 
                                         </tr>

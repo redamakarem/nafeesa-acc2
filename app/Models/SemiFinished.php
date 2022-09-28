@@ -269,9 +269,8 @@ class SemiFinished extends Model
             $this->getTotalRawMaterialsCostAttribute() +
             $this->getLaborCostsAttribute() +
             $this->getSharedCostsAttribute() +
-//            $this->getSemiFinishedTotalCostAttribute();
             $this->getSemiFinishedQuantityTotalAttribute();
-        return $sum/ $this->getOutputsPerKgAttribute();
+        return $sum;
 
     }
 
