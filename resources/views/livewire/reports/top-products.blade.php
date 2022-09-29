@@ -41,7 +41,7 @@
     var series = [];
     var labels = [];
     top_products.map(product =>{
-        series.push(parseFloat(product['total_sales']).toFixed(3));
+        series.push(parseFloat(product['total_sales']));
         labels.push(product['name_ar']);
     });
     var options = {
