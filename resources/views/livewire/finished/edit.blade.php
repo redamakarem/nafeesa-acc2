@@ -127,12 +127,12 @@
             @foreach($sfs as $sf)
 
                 <tr>
-                    <td><input  data-id="{{ $sf->id }}" type="checkbox" {{ $sf->value ? 'checked' : null }} wire:ignore  class="rm-enable"></td>
+                    <td><input  data-id="{{ $sf->id }}" type="checkbox" {{ $sf->value ? 'checked' : null }} wire:ignore  class="sf-enable"></td>
                     <td style="padding: 5px 0px">{{ $sf->item_code }}</td>
                     <td>{{ $sf->name_en }} | {{ $sf->name_ar }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->unit->name_en }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->new_total_cost }}</td>
-                    <td><input  {{ $sf->value ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:model.lazy="semi_finished.{{ $sf->id }}" type="text" class="rm-amount form-control" placeholder="Amount"></td>
+                    <td><input  {{ $sf->value ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:model.lazy="semi_finished.{{ $sf->id }}" type="text" class="sf-amount form-control" placeholder="Amount"></td>
                 </tr>
             @endforeach
         </table>
@@ -260,12 +260,32 @@
 @push('scripts')
     <script>
         jQuery(document).ready(function () {
-            jQuery('.rm-enable').on('click', function () {
+            // jQuery('.rm-enable').on('click', function () {
+            //     let id = jQuery(this).attr('data-id')
+            //     let enabled = jQuery(this).is(":checked")
+            //     jQuery('.rm-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+            //     jQuery('.rm-amount[data-id="' + id + '"]').val(null)
+            //     // @this.clean_raw_materials()
+            // })
+
+            // jQuery('.lb-enable').on('click', function () {
+            //     let id = jQuery(this).attr('data-id')
+            //     let enabled = jQuery(this).is(":checked")
+            //     jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+            //     jQuery('.lb-amount[data-id="' + id + '"]').val(null)
+            //     // @this.clean_raw_materials()
+            // })
+        })
+
+
+        document.addEventListener('livewire:load', function () {
+            jQuery('.rm-enable').change(function () {
                 let id = jQuery(this).attr('data-id')
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.rm-amount[data-id="' + id + '"]').attr('disabled', !enabled)
                 jQuery('.rm-amount[data-id="' + id + '"]').val(null)
-                // @this.clean_raw_materials()
+                let lvModel = jQuery('.rm-amount[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvModel,jQuery('.rm-amount[data-id="' + id + '"]').val())
             })
 
             jQuery('.lb-enable').on('click', function () {
@@ -275,12 +295,19 @@
                 jQuery('.lb-amount[data-id="' + id + '"]').val(null)
                 // @this.clean_raw_materials()
             })
-        })
+            jQuery('.sf-enable').on('click', function () {
+                let id = jQuery(this).attr('data-id')
+                let enabled = jQuery(this).is(":checked")
+                jQuery('.sf-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+                jQuery('.sf-amount[data-id="' + id + '"]').val(null)
+                let lvModel = jQuery('.sf-amount[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvModel,jQuery('.sf-amount[data-id="' + id + '"]').val())
+            })
 
-
-        document.addEventListener('livewire:load', function () {
-
-
+            jQuery('.rm-amount').blur(function(){
+                let lvModel = jQuery(this).attr('wire:model');
+                @this.set(lvModel,jQuery(this).val())
+            })
         })
     </script>
 @endpush

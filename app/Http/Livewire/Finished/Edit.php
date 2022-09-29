@@ -76,15 +76,27 @@ class Edit extends Component
 
     private function mapRawMaterials($rawMaterials)
     {
-        return collect($rawMaterials)->map(function ($i) {
+        $rawMaterials = array_filter($rawMaterials, function($a) { return ($a !== 0); });
+        $rawMaterials = array_filter($rawMaterials);
+        $result= collect($rawMaterials)->map(function ($i) {
+            if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
+            }
         });
+
+        return $result;
     }
     private function mapSemiFinished($semiFinished)
     {
-        return collect($semiFinished)->map(function ($i) {
+        $semiFinished = array_filter($semiFinished, function($a) { return ($a !== 0); });
+        $semiFinished = array_filter($semiFinished);
+        $result= collect($semiFinished)->map(function ($i) {
+            if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
+            }
         });
+
+        return $result;
     }
 
     private function mapLabor($labor)

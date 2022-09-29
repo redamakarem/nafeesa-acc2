@@ -142,14 +142,12 @@ class Edit extends Component
     {
         $rawMaterials = array_filter($rawMaterials, function($a) { return ($a !== 0); });
         $rawMaterials = array_filter($rawMaterials);
-//        dd($rawMaterials);
         $result= collect($rawMaterials)->map(function ($i) {
             if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
             }
         });
 
-//        dd($result);
         return $result;
 
     }
@@ -157,14 +155,12 @@ class Edit extends Component
     {
         $semiFinished = array_filter($semiFinished, function($a) { return ($a !== 0); });
         $semiFinished = array_filter($semiFinished);
-//        dd($semiFinished);
         $result= collect($semiFinished)->map(function ($i) {
             if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['amount' => $i];
             }
         });
 
-//        dd($result);
         return $result;
 
     }
