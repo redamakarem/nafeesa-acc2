@@ -16,7 +16,7 @@
     var options = {
           series: series,
           chart: {
-          width: 700,
+          width: 750,
           type: 'pie',
         },
         labels: labels,
