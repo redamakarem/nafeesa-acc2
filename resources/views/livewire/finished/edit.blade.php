@@ -284,8 +284,8 @@
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.rm-amount[data-id="' + id + '"]').attr('disabled', !enabled)
                 jQuery('.rm-amount[data-id="' + id + '"]').val(null)
-                let lvModel = jQuery('.rm-amount[data-id="' + id + '"]').attr('wire:model');
-                @this.set(lvModel,jQuery('.rm-amount[data-id="' + id + '"]').val())
+                // let lvModel = jQuery('.rm-amount[data-id="' + id + '"]').attr('wire:model');
+                // @this.set(lvModel,jQuery('.rm-amount[data-id="' + id + '"]').val())
             })
 
             jQuery('.lb-enable').on('click', function () {
