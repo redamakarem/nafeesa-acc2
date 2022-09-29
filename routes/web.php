@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Admin\RawMaterialController;
 use App\Http\Controllers\Admin\SemiFinishedController;
 use App\Http\Controllers\LoyaltyItemController;
+use App\Http\Controllers\ReportsController;
 
 Route::mediaLibrary();
 
@@ -100,6 +101,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     
     Route::get('reports/pps',[SalesController::class,'by_product'])->name('reports.pps');
     Route::get('reports/sales-by-date',[SalesController::class,'by_date'])->name('reports.sales-by-date');
+    Route::get('reports/sales-by-branch',[ReportsController::class,'sales_by_branch'])->name('reports.sales-by-branch');
+    Route::get('reports/top-products/{type}/{count}',[ReportsController::class,'top_products'])->name('top-products');
+
 
 });
 
