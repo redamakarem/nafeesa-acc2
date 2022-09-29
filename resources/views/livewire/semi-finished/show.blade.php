@@ -197,7 +197,7 @@
                                                 <div class="text-center">{{$rawMaterial->avg_cost}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="tbl-total text-center">{{$rawMaterial->pivot->amount * $rawMaterial->avg_cost }}</div>
+                                                <div class="tbl-total text-center">{{number_format($rawMaterial->pivot->amount * $rawMaterial->avg_cost,3) }}</div>
                                             </td>
 
                                         </tr>
@@ -220,7 +220,7 @@
 {{--                                            <div class="text-center font-medium text-green-500">-</div>--}}
 {{--                                        </td>--}}
                                         <td class="p-2 whitespace-nowrap">
-                                            <div class="tbl-total-result text-center font-medium text-green-500">{{$semiFinished->totalRawMaterialsCost}}</div>
+                                            <div class="tbl-total-result text-center font-medium text-green-500">{{number_format($semiFinished->totalRawMaterialsCost,3)}}</div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -286,7 +286,7 @@
                                                     <div class="text-left">{{$semi->pivot->amount}}</div>
                                                 </td>
                                                 <td class="p-2 whitespace-nowrap">
-                                                    <div class="text-left">{{$semi->new_total_cost}}</div>
+                                                    <div class="text-left">{{number_format($semi->new_total_cost,3)}}</div>
                                                 </td>
                                                 <td class="p-2 whitespace-nowrap">
                                                     <div class="text-left">{{$semi->new_total_cost * $semi->pivot->amount}}</div>
@@ -306,7 +306,7 @@
                                                 <div class="text-left font-medium text-green-500">-</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left font-medium text-green-500">{{$semiFinished->semi_finished_quantity_total}}</div>
+                                                <div class="text-left font-medium text-green-500">{{number_format($semiFinished->semi_finished_quantity_total,3)}}</div>
                                             </td>
 
 
@@ -377,13 +377,13 @@
 {{--                                                <div class="text-left font-medium text-green-500">{{$labor->total_cost}}</div>--}}
 {{--                                            </td>--}}
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$labor->cost_per_hour}}</div>
+                                                <div class="text-left">{{number_format($labor->cost_per_hour,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$labor->total_labor_time}}</div>
+                                                <div class="text-left">{{number_format($labor->total_labor_time,3)}}</div>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <div class="text-left">{{$labor->labor_cost}}</div>
+                                                <div class="text-left">{{number_format($labor->labor_cost,3)}}</div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -404,10 +404,10 @@
 {{--                                            <div class="text-left font-medium text-green-500">-</div>--}}
 {{--                                        </td>--}}
                                         <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left font-medium text-green-500">{{$semiFinished->total_labor_time}}</div>
+                                            <div class="text-left font-medium text-green-500">{{number_format($semiFinished->total_labor_time,3)}}</div>
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left font-medium text-green-500">{{$semiFinished->labor_costs}}</div>
+                                            <div class="text-left font-medium text-green-500">{{number_format($semiFinished->labor_costs,3)}}</div>
                                         </td>
 
 
@@ -473,7 +473,7 @@
                                             <div class="text-left">Total</div>
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left">{{$semiFinished->total_related_costs}}</div>
+                                            <div class="text-left">{{number_format($semiFinished->total_related_costs,3)}}</div>
                                         </td>
 
 
