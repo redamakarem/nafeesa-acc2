@@ -36,11 +36,21 @@
     //     var chart = new ApexCharts(document.querySelector("#top-products"), options);
     //     chart.render();
 
+    var top_products = @json($top_products);
+    console.log(top_products);
+    var series = [];
+    var labels = [];
+    top_products.map(product =>{
+        series.push(parseFloat(product['total_sales']).toFixed(3));
+        labels.push(product['name_ar']);
+    });
     var options = {
-          series: [44, 55, 41, 17, 15],
+          series: series,
           chart: {
+          width: 750,
           type: 'donut',
         },
+        labels: labels,
         responsive: [{
           breakpoint: 480,
           options: {
