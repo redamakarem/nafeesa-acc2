@@ -311,6 +311,10 @@
                 let lvModel = jQuery(this).attr('wire:model');
                 @this.set(lvModel,jQuery(this).val())
             })
+            jQuery('.sf-amount').blur(function(){
+                let lvModel = jQuery(this).attr('wire:model');
+                @this.set(lvModel,jQuery(this).val())
+            })
         })
     </script>
 @endpush
