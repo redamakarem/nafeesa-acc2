@@ -132,7 +132,7 @@
                     <td>{{ $sf->name_en }} | {{ $sf->name_ar }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->unit->name_en }}</td>
                     <td style="padding: 5px 0px" class="text-center">{{ $sf->new_total_cost }}</td>
-                    <td><input  {{ $sf->value ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:model.lazy="semi_finished.{{ $sf->id }}" type="text" class="sf-amount form-control" placeholder="Amount"></td>
+                    <td><input  {{ $sf->value ? null : 'disabled' }}  data-id="{{ $sf->id }}" wire:model="semi_finished.{{ $sf->id }}" type="text" class="sf-amount form-control" placeholder="Amount"></td>
                 </tr>
             @endforeach
         </table>
