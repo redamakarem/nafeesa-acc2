@@ -64,7 +64,7 @@
                             {{ trans('cruds.semiFinished.fields.kilos_per_dough') }}
                         </th>
                         <td>
-                            {{ $semiFinished->kilos_per_dough }}
+                            {{ number_format($semiFinished->kilos_per_dough,3) }}
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +72,7 @@
                             Inputs per KG
                         </th>
                         <td>
-                            {{ $semiFinished->inputs_per_kg }}
+                            {{ number_format($semiFinished->inputs_per_kg,3) }}
                         </td>
                     </tr>
                     <tr>
@@ -80,7 +80,7 @@
                             Outputs per KG
                         </th>
                         <td>
-                            {{ $semiFinished->outputs_per_kg }}
+                            {{ number_format($semiFinished->outputs_per_kg,3) }}
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +88,7 @@
                             Production loss percentage
                         </th>
                         <td>
-                            {{ $semiFinished->production_loss_percentage }} %
+                            {{ number_format($semiFinished->production_loss_percentage,1) }} %
                         </td>
                     </tr>
                     <tr>
@@ -96,7 +96,7 @@
                             Cost per KG
                         </th>
                         <td>
-                            {{ $semiFinished->cost_per_kg }}
+                            {{ number_format($semiFinished->cost_per_kg,3) }}
                         </td>
                     </tr>
 {{--                    <tr>--}}
@@ -112,7 +112,7 @@
                             Factory Salaries
                         </th>
                         <td>
-                            {{ $semiFinished->factorySalariesCost }}
+                            {{ number_format($semiFinished->factorySalariesCost,3) }}
                         </td>
                     </tr>
                     <tr>
@@ -120,7 +120,7 @@
                             Factory Unit Cost
                         </th>
                         <td>
-                            {{ $semiFinished->factoryUnitCosts }}
+                            {{ number_format($semiFinished->factoryUnitCosts,3) }}
                         </td>
                     </tr>
                     <tr>
@@ -128,7 +128,7 @@
                             New Total
                         </th>
                         <td>
-                            {{ $semiFinished->new_total_cost }}
+                            {{ number_format( $semiFinished->finals_total/$semiFinished->kilos_per_dough,3 ) }}
                         </td>
                     </tr>
                     </tbody>
