@@ -17,7 +17,7 @@
           series: series,
           chart: {
           width: 750,
-          type: 'pie',
+          type: 'donut',
         },
         labels: labels,
         responsive: [{
