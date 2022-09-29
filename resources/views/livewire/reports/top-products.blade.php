@@ -20,7 +20,17 @@
           type: 'pie',
         },
         labels: labels,
-        
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#top-products"), options);
