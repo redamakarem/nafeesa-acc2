@@ -15,7 +15,7 @@
                 @endcan
             </div>
         </div>
-        @livewire('reports.top-products',[$result])
+        @livewire('reports.top-products')
 
     </div>
 </div>
