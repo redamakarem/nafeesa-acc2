@@ -7,12 +7,6 @@
                 <h6 class="card-title">
                     Top Products
                 </h6>
-
-                @can('raw_material_create')
-                    <a class="btn btn-indigo" href="{{ route('admin.raw-materials.create') }}">
-                        {{ trans('global.add') }} {{ trans('cruds.rawMaterial.title_singular') }}
-                    </a>
-                @endcan
             </div>
         </div>
         @livewire('reports.top-products')

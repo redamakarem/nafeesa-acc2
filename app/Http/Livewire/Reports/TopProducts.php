@@ -82,8 +82,11 @@ class TopProducts extends Component
         $this->top_products($this->selected_clause,$this->selected_count);
         $this->emit('refreshChart',['seriesData', $this->result]);
     }
-    // public function updatedSelectedDatesArray($value)
-    // {
-    //     dd($this->selected_dates_array);
-    // }
+
+    public function updatedSelectedCount($value)
+    {
+        $this->top_products($this->selected_clause,$this->selected_count);
+        $this->emit('refreshChart',['seriesData', $this->result]);
+    }
+    
 }

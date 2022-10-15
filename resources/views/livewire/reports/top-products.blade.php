@@ -2,7 +2,7 @@
   <div class="card-controls">
     <div class="w-full">
       <div class="form-group {{ $errors->has('sale.date') ? 'invalid' : '' }}">
-        <label class="form-label required" for="date">Date Range</label>
+        <label class="form-label required" for="date">Dates</label>
         <x-date-picker class="form-control" required wire:model="selected_dates" id="selected_dates" name="selected_dates" picker="date" mode="multiple" />
         <div class="validation-message">
             {{ $errors->first('sale.date') }}
@@ -20,6 +20,15 @@
         <option value="profit">profit</option>
       </select>
           {{ $errors->first('finished.unit_id') }}
+      </div>
+      <div class="help-block">
+          {{ trans('cruds.finished.fields.unit_helper') }}
+      </div>
+  </div>
+    <div class="form-group {{ $errors->has('finished.unit_id') ? 'invalid' : '' }}">
+      <label class="form-label required" for="by">Count</label>
+      <input type="number" step="1" wire:model='selected_count' />
+          {{ $errors->first('selected_count') }}
       </div>
       <div class="help-block">
           {{ trans('cruds.finished.fields.unit_helper') }}
