@@ -61,4 +61,9 @@ class Branch extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sales::class);
+    }
 }

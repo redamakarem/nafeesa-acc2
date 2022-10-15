@@ -143,6 +143,23 @@
                                         </a>
                                     </li>
                                 @endcan
+                                
+
+                        </ul>
+                    </li>
+                @endcan
+
+
+                @can('sale_access')
+                    <li class="items-center">
+                        <a class="has-sub {{ request()->is("admin/reports*")||request()->is("admin/import/sales*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="#" onclick="window.openSubNav(this)">
+                            <i class="fa-fw fas c-sidebar-nav-icon fa-users">
+                            </i>
+                            Reports
+                        </a>
+                        <ul class="ml-4 subnav hidden">
+                            
+                            
                                 @can('sale_access')
                                 <li class="items-center">
                                     <a class="{{ request()->is("admin/reports/pps*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.pps") }}">
@@ -158,6 +175,24 @@
                                         <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
                                         </i>
                                         By Dates
+                                    </a>
+                                </li>
+                            @endcan
+                                @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("reports/sales-by-branch*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.sales-by-branch") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        By Branch
+                                    </a>
+                                </li>
+                            @endcan
+                                @can('sale_access')
+                                <li class="items-center">
+                                    <a class="{{ request()->is("reports/top-products*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.top-products") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        Top Products
                                     </a>
                                 </li>
                             @endcan
