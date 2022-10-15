@@ -275,7 +275,7 @@ class Finished extends Model implements HasMedia
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function pps_count($start_date,$end_date,$branches)
+    public function pps_count($start_date,$end_date,$branches=[])
     {
         $query=null;
         if($branches ==[]){
