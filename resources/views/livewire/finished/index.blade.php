@@ -101,7 +101,7 @@
 {{--                                {{ $finished->labour_time }}--}}
 {{--                            </td>--}}
                             <td>
-                                {{ $finished->finals_total }}
+                                {{ number_format($finished->finals_total,3) }}
                             </td>
                             <td>
                                 {{ $finished->sale_price }}
