@@ -107,7 +107,7 @@
                                 {{ $semiFinished->kilos_per_dough }}
                             </td>
                             <td>
-                                KD {{ $semiFinished->finals_total }}
+                                KD {{ number_format( $semiFinished->finals_total/$semiFinished->kilos_per_dough,3 ) }}
                             </td>
                             <td>
                                 <div class="flex justify-end">
