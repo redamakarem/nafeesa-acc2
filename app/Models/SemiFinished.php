@@ -131,12 +131,14 @@ class SemiFinished extends Model
 
     public function getNewTotalCostAttribute()
     {
-        $total = $this->getTotalRawMaterialsCostAttribute() +
-            $this->getLaborCostsAttribute() +
-            $this->getSharedCostsAttribute() +
-            $this->getSemiFinishedTotalCostAttribute();
-        $result = $total / $this->kilos_per_dough;
-        return number_format($result,3);
+        // $total = $this->getTotalRawMaterialsCostAttribute() +
+        //     $this->getLaborCostsAttribute() +
+        //     $this->getSharedCostsAttribute() +
+        //     $this->getSemiFinishedTotalCostAttribute();
+        // $result = $total / $this->kilos_per_dough;
+        // return number_format($result,3);
+
+        return $this->getFinalsTotalAttribute() / $this->kilos_per_dough;
     }
 
     public function getSemiFinishedTotalCostAttribute()
