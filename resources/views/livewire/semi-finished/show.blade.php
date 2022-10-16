@@ -128,7 +128,7 @@
                             New Total
                         </th>
                         <td>
-                            {{ $semiFinished->new_total_cost ) }}
+                            {{ $semiFinished->new_total_cost }}
                         </td>
                     </tr>
                     </tbody>
