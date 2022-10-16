@@ -67,7 +67,7 @@ foreach ($sales as $sale){
             // dd($finished_item->sale_price);
             $finished_item->save();
         }
-        return redirect(route('admin.loyalty-items.index'));
+        return redirect(route('admin.finisheds.index'));
 
     }
 }
