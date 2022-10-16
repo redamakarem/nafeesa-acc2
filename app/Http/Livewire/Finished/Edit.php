@@ -102,7 +102,9 @@ class Edit extends Component
     private function mapLabor($labor)
     {
         return collect($labor)->map(function ($i) {
+            if ($i !=null && $i>0 && $i!='0' && $i !=''){
             return ['workers' => $i];
+            }
         });
     }
 
