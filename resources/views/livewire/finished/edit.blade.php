@@ -292,7 +292,14 @@
                 let id = jQuery(this).attr('data-id')
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
-                jQuery('.lb-amount[data-id="' + id + '"]').val(null)
+                if(!enabled)
+                {
+                    jQuery('.lb-amount[data-id="' + id + '"]').val(null)
+                }
+                let lvModel = jQuery('.lb-amount[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvModel,jQuery('.lb-amount[data-id="' + id + '"]').val())
+                // jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+                // jQuery('.lb-amount[data-id="' + id + '"]').val(null)
                 // @this.clean_raw_materials()
             })
             jQuery('.sf-enable').on('click', function () {
