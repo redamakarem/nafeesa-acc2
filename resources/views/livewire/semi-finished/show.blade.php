@@ -128,7 +128,7 @@
                             New Total
                         </th>
                         <td>
-                            {{ number_format( $semiFinished->finals_total/$semiFinished->kilos_per_dough,3 ) }}
+                            {{ $semiFinished->new_total_cost ) }}
                         </td>
                     </tr>
                     </tbody>
