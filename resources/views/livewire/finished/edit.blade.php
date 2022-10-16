@@ -166,8 +166,8 @@
                     <td><input  data-id="{{ $lb->id }}" type="checkbox" {{ $lb->value ? 'checked' : null }} wire:ignore  class="lb-enable"></td>
                     <td>{{ $lb->title_en }} | {{ $lb->title_ar }}</td>
                     <td style="padding: 5px 0px">{{ $lb->cost_per_hour }}</td>
-                    <td><input  {{ $lb->value ? null : 'disabled' }}  data-id="{{ $lb->id }}" wire:model.lazy="labor.{{ $lb->id }}.workers" type="text" class="lb-amount form-control" placeholder="How many?"></td>
-                    <td><input  {{ $lb->labor_time ? null : 'disabled' }}  data-id="{{ $lb->id }}" wire:model.lazy="labor.{{ $lb->id }}.labor_time" type="text" class="lb-amount form-control" placeholder="How many?"></td>
+                    <td><input wire:ignore {{ $lb->value ? null : 'disabled' }}  data-id="{{ $lb->id }}" wire:model="labor.{{ $lb->id }}.workers" type="text" class="lb-amount form-control" placeholder="How many?"></td>
+                    <td><input wire:ignore {{ $lb->labor_time ? null : 'disabled' }}  data-id="{{ $lb->id }}" wire:model="labor.{{ $lb->id }}.labor_time" type="text" class="lb-time form-control" placeholder="How many?"></td>
                 </tr>
             @endforeach
         </table>
@@ -292,12 +292,16 @@
                 let id = jQuery(this).attr('data-id')
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+                jQuery('.lb-time[data-id="' + id + '"]').attr('disabled', !enabled)
                 if(!enabled)
                 {
-                    jQuery('.lb-amount[data-id="' + id + '"]').val(null)
+                    jQuery('.lb-amount[data-id="' + id + '"]').val(null);
+                    jQuery('.lb-time[data-id="' + id + '"]').val(null);
                 }
-                let lvModel = jQuery('.lb-amount[data-id="' + id + '"]').attr('wire:model');
-                @this.set(lvModel,jQuery('.lb-amount[data-id="' + id + '"]').val())
+                let lvAmtModel = jQuery('.lb-amount[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvAmtModel,jQuery('.lb-amount[data-id="' + id + '"]').val())
+                let lvTimeModel = jQuery('.lb-time[data-id="' + id + '"]').attr('wire:model');
+                @this.set(lvTimeModel,jQuery('.lb-time[data-id="' + id + '"]').val())
                 // jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
                 // jQuery('.lb-amount[data-id="' + id + '"]').val(null)
                 // @this.clean_raw_materials()

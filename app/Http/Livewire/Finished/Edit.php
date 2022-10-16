@@ -101,11 +101,19 @@ class Edit extends Component
 
     private function mapLabor($labor)
     {
-        return collect($labor)->map(function ($i) {
-            if ($i !=null && $i>0 && $i!='0' && $i !=''){
-            return ['workers' => $i];
+        
+        $arr =  collect($labor)->map(function ($i) {
+            if ($i['labor_time'] !='' && $i['workers'] !=''){
+            return $i;
             }
         });
+        $arr = $arr->filter(function($value, $key) {
+            // dd($value);
+            return  $value != null;
+        });
+        // dd($arr);
+
+        return $arr;
     }
 
     public function render()
@@ -116,11 +124,11 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
-
+        // dd($this->mapLabor($this->labor));
         $this->finished->save();
         $this->finished->rawMaterials()->sync($this->mapRawMaterials($this->raw_materials));
         $this->finished->semiFinished()->sync($this->mapSemiFinished($this->semi_finished));
-        $this->finished->labor()->sync($this->labor);
+        $this->finished->labor()->sync($this->mapLabor($this->labor));
         $this->finished->syncFromMediaLibraryRequest($this->item_image)
             ->toMediaCollection('finished_images');
 
