@@ -138,7 +138,7 @@ class SemiFinished extends Model
         // $result = $total / $this->kilos_per_dough;
         // return number_format($result,3);
 
-        return $this->getFinalsTotalAttribute() / $this->kilos_per_dough;
+        return number_format(($this->getFinalsTotalAttribute() / $this->kilos_per_dough),3) ;
     }
 
     public function getSemiFinishedTotalCostAttribute()
