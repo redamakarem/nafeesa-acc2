@@ -40,132 +40,93 @@
 var options=null;
 var top_products=null;
 
+function initChart(seriesData){
+            var res1 = @this.range1_query_res;
+            var res2 = @this.range2_query_res;
+            console.log(res1,res2);
+    var series_array = [];
+    
+     options = {
+          series: [{
+          name: 'Total Sales-R1',
+          data: [res1[0]['total_sales'], res1[1]['total_sales'],res1[2]['total_sales'],res1[3]['total_sales'],res1[4]['total_sales']]
+        },
+        {
+          name: 'Total Sales-R2',
+          data: [res2[0]['total_sales'], res2[1]['total_sales'],res2[2]['total_sales'],res2[3]['total_sales'],res2[4]['total_sales']]
+        },
+        {
+          name: 'Total Costs-R1',
+          data: [res1[0]['total_costs'], res1[1]['total_costs'],res1[2]['total_costs'],res1[3]['total_costs'],res1[4]['total_costs']]
+        }, 
+        {
+          name: 'Total Costs-R2',
+          data: [res2[0]['total_costs'], res2[1]['total_costs'],res2[2]['total_costs'],res2[3]['total_costs'],res2[4]['total_costs']]
+        },{
+          name: 'Total Profit-R1',
+          data: [res1[0]['total_profit'], res1[1]['total_profit'],res1[2]['total_profit'],res1[3]['total_profit'],res1[4]['total_profit']]
+        },
+        {
+          name: 'Total Profit-R2',
+          data: [res2[0]['total_profit'], res2[1]['total_profit'],res2[2]['total_profit'],res2[3]['total_profit'],res2[4]['total_profit']]
+        }
+    ],
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: ['Hawalli','Oquila','Salmiya','Jahra','Ardiya'],
+        },
+        yaxis: {
+          title: {
+            text: 'KD'
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return "KD " + val 
+            }
+          }
+        }
+        };
+        }
+
 document.addEventListener('livewire:load', function () {
 
   
 
-    //     function initChart(data){
-    //        top_products = data;
-    // console.log(top_products);
-    // var series = [];
-    // var labels = [];
-    // top_products.map(product =>{
-    //     series.push(parseFloat(product['total']));
-    //     labels.push(product['name_ar']);
-    // });
-    //  options = {
-    //       series: series,
-    //       chart: {
-    //       width: 750,
-    //       type: 'donut',
-    //     },
-    //     labels: labels,
-    //     responsive: [{
-    //       breakpoint: 480,
-    //       options: {
-    //         chart: {
-    //           width: 200
-    //         },
-    //         legend: {
-    //           position: 'bottom'
-    //         }
-    //       }
-    //     }]
-    //     };
+    
 
         
-    //     }
-
-    //     initChart(@this.result);
-
     
-
-        // title: {
-        //     text: 'Grouped Labels on the X-axis',
-        // },
-        // tooltip: {
-        //   x: {
-        //     formatter: function(val) {
-        //       return "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
-        //     }  
-        //   }
-        // },
-
-        function initChart(seriesData){
-            var res1 = @this.range1_query_res;
-            var res2 = @this.range2_query_res;
-            console.log(res1,res2);
-
-    var options = {
-          series: [{
-          name: 'PRODUCT A',
-          data: [44, 55, 41, 67, 22, 43]
-        }, {
-          name: 'PRODUCT B',
-          data: [13, 23, 20, 8, 13, 27]
-        }, {
-          name: 'PRODUCT C',
-          data: [11, 17, 15, 15, 21, 14]
-        }, {
-          name: 'PRODUCT D',
-          data: [21, 7, 25, 13, 22, 8]
-        }],
-          chart: {
-          type: 'bar',
-          height: 350,
-          stacked: true,
-          toolbar: {
-            show: true
-          },
-          zoom: {
-            enabled: true
-          }
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            legend: {
-              position: 'bottom',
-              offsetX: -10,
-              offsetY: 0
-            }
-          }
-        }],
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            borderRadius: 10,
-            dataLabels: {
-              total: {
-                enabled: true,
-                style: {
-                  fontSize: '13px',
-                  fontWeight: 900
-                }
-              }
-            }
-          },
-        },
-        xaxis: {
-          type: 'category',
-          categories: [@this.range1, @this.range2],
-        },
-        legend: {
-          position: 'right',
-          offsetY: 40
-        },
-        fill: {
-          opacity: 1
-        }
-        };
-        }
-    
-        var chart = new ApexCharts(document.querySelector("#compare-graph"), options);
-        chart.render();
+        
 
     @this.on('refreshChart',(chartData) =>{
+        console.log('YAAASS');
       console.log(chartData.seriesData);
       initChart(chartData.seriesData);
+      var chart = new ApexCharts(document.querySelector("#compare-graph"), options);
+        chart.render();
 
       chart.updateOptions (options)
     })
