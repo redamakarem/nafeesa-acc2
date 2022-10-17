@@ -192,7 +192,7 @@
                                     <a class="{{ request()->is("reports/sales-compare*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.sales-compare") }}">
                                         <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
                                         </i>
-                                        By Branch
+                                        Compare Sales
                                     </a>
                                 </li>
                             @endcan
