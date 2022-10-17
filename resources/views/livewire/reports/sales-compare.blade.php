@@ -91,7 +91,7 @@ document.addEventListener('livewire:load', function () {
         //   }
         // },
 
-        function initChart(){
+        function initChart(seriesData){
             var res1 = @this.range1_query_res;
             var res2 = @this.range2_query_res;
             console.log(res1,res2);
