@@ -189,6 +189,15 @@
                             @endcan
                                 @can('sale_access')
                                 <li class="items-center">
+                                    <a class="{{ request()->is("reports/sales-compare*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.sales-compare") }}">
+                                        <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
+                                        </i>
+                                        By Branch
+                                    </a>
+                                </li>
+                            @endcan
+                                @can('sale_access')
+                                <li class="items-center">
                                     <a class="{{ request()->is("reports/top-products*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.reports.top-products") }}">
                                         <i class="fa-fw c-sidebar-nav-icon fas fa-unlock-alt">
                                         </i>
