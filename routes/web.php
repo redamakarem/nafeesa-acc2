@@ -103,6 +103,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('reports/sales-by-date',[SalesController::class,'by_date'])->name('reports.sales-by-date');
     Route::get('reports/sales-by-branch',[ReportsController::class,'sales_by_branch'])->name('reports.sales-by-branch');
     Route::get('reports/top-products/',[ReportsController::class,'top_products'])->name('reports.top-products');
+    Route::get('reports/sales-compare/',[ReportsController::class,'sales_compare'])->name('reports.sales-compare');
 
 
 });

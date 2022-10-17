@@ -54,6 +54,18 @@
                 update(DateStr)
             }
         })
+@elseif($attributes['picker'] === 'date' && $attributes['mode'] === 'range')
+        let el = flatpickr('.flatpickr-{{ $attributes['id'] }}', {
+            dateFormat: "{{ config('project.flatpickr_date_format') }}",
+            wrap: true,
+            mode: "range",
+            onChange: (SelectedDates, DateStr, instance) => {
+                update(DateStr)
+            },
+            onReady: (SelectedDates, DateStr, instance) => {
+                update(DateStr)
+            }
+        })
 @elseif($attributes['picker'] === 'time')
         let el = flatpickr('.flatpickr-{{ $attributes['id'] }}', {
             enableTime: true,

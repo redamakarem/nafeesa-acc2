@@ -22,4 +22,8 @@ class ReportsController extends Controller
     {
         return view('admin.reports.top-products');
     }
+    public function sales_compare()
+    {
+        return view('admin.reports.sales-compare');
+    }
 }
