@@ -34,6 +34,7 @@ class SalesCompare extends Component
         
         $this->range1_query_res = $this->get_graph_data($this->range1_array);
         $this->range2_query_res = $this->get_graph_data($this->range2_array);
+        $this->emit('refreshChart',['seriesData', [$this->range1_query_res, $this->range2_query_res]]);
     }
 
     public function updatedRange1($value)

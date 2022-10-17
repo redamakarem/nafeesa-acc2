@@ -78,9 +78,23 @@ document.addEventListener('livewire:load', function () {
 
     //     initChart(@this.result);
 
-    var res1 = @this.range1_query_res;
-    var res2 = @this.range2_query_res;
-    console.log(res1,res2);
+    
+
+        // title: {
+        //     text: 'Grouped Labels on the X-axis',
+        // },
+        // tooltip: {
+        //   x: {
+        //     formatter: function(val) {
+        //       return "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
+        //     }  
+        //   }
+        // },
+
+        function initChart(){
+            var res1 = @this.range1_query_res;
+            var res2 = @this.range2_query_res;
+            console.log(res1,res2);
 
     var options = {
           series: [{
@@ -144,30 +158,17 @@ document.addEventListener('livewire:load', function () {
           opacity: 1
         }
         };
-
-        // title: {
-        //     text: 'Grouped Labels on the X-axis',
-        // },
-        // tooltip: {
-        //   x: {
-        //     formatter: function(val) {
-        //       return "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
-        //     }  
-        //   }
-        // },
-
-
+        }
     
         var chart = new ApexCharts(document.querySelector("#compare-graph"), options);
         chart.render();
 
-    // @this.on('refreshChart',(chartData) =>{
-    //   console.log(chartData.seriesData);
-    //   console.log(@this.result);
-    //   initChart(@this.result);
+    @this.on('refreshChart',(chartData) =>{
+      console.log(chartData.seriesData);
+      initChart(chartData.seriesData);
 
-    //   chart.updateOptions (options)
-    // })
+      chart.updateOptions (options)
+    })
 
 })
     
