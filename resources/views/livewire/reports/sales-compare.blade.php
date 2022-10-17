@@ -78,57 +78,73 @@ document.addEventListener('livewire:load', function () {
 
     //     initChart(@this.result);
 
+    var res1 = @this.range1_query_res;
+    var res2 = @this.range2_query_res;
+    console.log(res1,res2);
+
     var options = {
           series: [{
-          name: "sales",
-          data: [{
-            x: '2019/01/01',
-            y: 400
-          }, {
-            x: '2019/04/01',
-            y: 430
-          }, {
-            x: '2019/07/01',
-            y: 448
-          }, {
-            x: '2019/10/01',
-            y: 470
-          }, {
-            x: '2020/01/01',
-            y: 540
-          }, {
-            x: '2020/04/01',
-            y: 580
-          }, {
-            x: '2020/07/01',
-            y: 690
-          }, {
-            x: '2020/10/01',
-            y: 690
-          }]
+          name: 'PRODUCT A',
+          data: [44, 55, 41, 67, 22, 43]
+        }, {
+          name: 'PRODUCT B',
+          data: [13, 23, 20, 8, 13, 27]
+        }, {
+          name: 'PRODUCT C',
+          data: [11, 17, 15, 15, 21, 14]
+        }, {
+          name: 'PRODUCT D',
+          data: [21, 7, 25, 13, 22, 8]
         }],
           chart: {
           type: 'bar',
-          height: 380
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            borderRadius: 10,
+            dataLabels: {
+              total: {
+                enabled: true,
+                style: {
+                  fontSize: '13px',
+                  fontWeight: 900
+                }
+              }
+            }
+          },
         },
         xaxis: {
           type: 'category',
-        //   labels: {
-        //     formatter: function(val) {
-        //       return "Q" + dayjs(val).quarter()
-        //     }
-          },
-          group: {
-            style: {
-              fontSize: '10px',
-              fontWeight: 700
-            },
-            groups: [
-              { title: '2019', cols: 4 },
-              { title: '2020', cols: 4 }
-            ]
-          }
+          categories: [@this.range1, @this.range2],
+        },
+        legend: {
+          position: 'right',
+          offsetY: 40
+        },
+        fill: {
+          opacity: 1
         }
+        };
+
         // title: {
         //     text: 'Grouped Labels on the X-axis',
         // },
