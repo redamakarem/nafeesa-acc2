@@ -86,7 +86,7 @@
                                 <td>{{ $rm->name_en }} | {{ $rm->name_ar }}</td>
                                 <td style="padding: 5px 0px">{{ $rm->unit->name_en }}</td>
                                 <td style="padding: 5px 0px">{{ $rm->avg_cost }}</td>
-                                <td><input value="{{ $rm->value ?? null }}"  {{ $rm->value ? null : 'disabled' }} name="rms[{{$rm->id}}]"  data-id="{{ $rm->id }}"  type="text" class="rm-amount form-control" placeholder="Amount"></td>
+                                <td><input value="{{ $rm->value ?? null }}"  {{ $rm->value ? null : 'disabled' }} name="rms[{{$rm->id}}]"  data-id="{{ $rm->id }}"  type="text" class="rm-amount form-control disabled:bg-gray-400" placeholder="Amount"></td>
                             </tr>
                         @endforeach
                     </table>
@@ -114,7 +114,7 @@
                                 <td>{{ $sf->name_en }} | {{ $sf->name_ar }}</td>
                                 <td style="padding: 5px 0px" class="text-center">{{ $sf->unit->name_en }}</td>
                                 <td style="padding: 5px 0px" class="text-center">{{ $sf->new_total_cost }}</td>
-                                <td><input  {{ $sf->value ? null : 'disabled' }} value="{{$sf->value}}"  data-id="{{ $sf->id }}" name="sfs[{{$sf->id}}]" type="text" class="sf-amount form-control" placeholder="Amount"></td>
+                                <td><input  {{ $sf->value ? null : 'disabled' }} value="{{$sf->value}}"  data-id="{{ $sf->id }}" name="sfs[{{$sf->id}}]" type="text" class="sf-amount form-control disabled:bg-gray-400" placeholder="Amount"></td>
                             </tr>
                         @endforeach
                     </table>
@@ -139,7 +139,7 @@
                                 <td>{{ $lb->title_en }} | {{ $lb->title_ar }}</td>
                                 <td style="padding: 5px 0px">{{ $lb->cost_per_hour }}</td>
                                 <td><input  {{ $lb->value ? null : 'disabled' }} value="{{$lb->value}}" data-id="{{ $lb->id }}"  type="text" class="lb-amount form-control" placeholder="How many?"></td>
-                                <td><input  {{ $lb->labor_time ? null : 'disabled' }} value="{{$lb->labor_time}}" data-id="{{ $lb->id }}"  type="text" class="lb-time form-control" placeholder="How many?"></td>
+                                <td><input  {{ $lb->labor_time ? null : 'disabled' }} value="{{$lb->labor_time}}" data-id="{{ $lb->id }}"  type="text" class="lb-time form-control disabled:bg-gray-400" placeholder="How many?"></td>
                             </tr>
                         @endforeach
                     </table>
