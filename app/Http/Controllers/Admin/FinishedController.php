@@ -121,11 +121,11 @@ foreach ($sales as $sale){
             $sale->save();
         }
         $loyalty_whitelist = LoyaltyItem::all()->pluck('item_id')->flatten()->toArray();
-        // dd($id,$loyalty_whitelist);
+        
         if(!in_array(intval($id),$loyalty_whitelist)){
             $finished_item = Finished::findOrfail($id);
             $finished_item->loyalty = $finished_item->sale_price * 0.03;
-            // dd($finished_item->sale_price);
+            
             $finished_item->save();
         }
         return redirect(route('admin.finisheds.index'));
