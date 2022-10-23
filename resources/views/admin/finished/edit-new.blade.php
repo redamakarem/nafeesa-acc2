@@ -140,8 +140,8 @@
                                 <td><input  data-id="{{ $lb->id }}" type="checkbox" {{ $lb->value ? 'checked' : null }} class="lb-enable"></td>
                                 <td>{{ $lb->title_en }} | {{ $lb->title_ar }}</td>
                                 <td style="padding: 5px 0px">{{ $lb->cost_per_hour }}</td>
-                                <td><input  {{ $lb->value ? null : 'disabled' }} value="{{$lb->value}}" data-id="{{ $lb->id }}"  type="text" class="lb-amount form-control" placeholder="How many?"></td>
-                                <td><input  {{ $lb->labor_time ? null : 'disabled' }} value="{{$lb->labor_time}}" data-id="{{ $lb->id }}"  type="text" class="lb-time form-control disabled:bg-gray-400" placeholder="How many?"></td>
+                                <td><input  {{ $lb->value ? null : 'disabled' }} value="{{$lb->value}}" data-id="{{ $lb->id }}" name="lbs[{{$lb->id}}]['workers']"  type="text" class="lb-amount form-control" placeholder="How many?"></td>
+                                <td><input  {{ $lb->labor_time ? null : 'disabled' }} value="{{$lb->labor_time}}" name="lbs[{{$lb->id}}]['labor_time']" data-id="{{ $lb->id }}"   type="text" class="lb-time form-control disabled:bg-gray-400" placeholder="How many?"></td>
                             </tr>
                         @endforeach
                     </table>

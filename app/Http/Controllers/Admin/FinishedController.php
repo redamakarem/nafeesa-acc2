@@ -98,6 +98,7 @@ class FinishedController extends Controller
         $finished->update($validated_data);
         $finished->semiFinished()->sync($this->mapSemiFinished($request['sfs']??[]));
         $finished->rawMaterials()->sync($this->mapRawMaterials($request['rms']??[]));
+        $finished->labor()->sync($request['lbs']??[]);
         return redirect(route('admin.finisheds.index'));
     }
 
@@ -156,5 +157,12 @@ class FinishedController extends Controller
         });
 
         return $result;
+    }
+
+    private function mapLabor($labor)
+    {
+        return collect($labor)->map(function ($i) {
+            return ['workers' => $i];
+        });
     }
 }
