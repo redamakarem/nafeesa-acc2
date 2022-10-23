@@ -133,7 +133,7 @@
                                         </a>
                                     @endcan
                                     @can('finished_edit')
-                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.finisheds.edit', $finished) }}">
+                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.finished.edit-new', $finished->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
@@ -147,11 +147,7 @@
                                         Costs
                                     </a>
                                 @endcan
-                                    @can('finished_edit')
-                                    <a class="btn btn-sm bg-black text-white mr-2" href="{{ route('admin.finished.edit-new', $finished->id) }}">
-                                        NE
-                                    </a>
-                                @endcan
+                                    
                                 </div>
                             </td>
                         </tr>
