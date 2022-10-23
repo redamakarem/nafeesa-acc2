@@ -251,6 +251,13 @@
                 jQuery('.rm-amount[data-id="' + id + '"]').val(null)
                 
             })
+            jQuery('.sf-enable').on('click', function () {
+                let id = jQuery(this).attr('data-id')
+                let enabled = jQuery(this).is(":checked")
+                jQuery('.sf-amount[data-id="' + id + '"]').attr('disabled', !enabled)
+                jQuery('.sf-amount[data-id="' + id + '"]').val(null)
+                
+            })
 
             jQuery('.lb-enable').on('click', function () {
                 let id = jQuery(this).attr('data-id')
