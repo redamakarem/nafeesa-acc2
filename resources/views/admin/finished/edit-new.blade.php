@@ -264,6 +264,8 @@
                 let enabled = jQuery(this).is(":checked")
                 jQuery('.lb-amount[data-id="' + id + '"]').attr('disabled', !enabled)
                 jQuery('.lb-amount[data-id="' + id + '"]').val(null)
+                jQuery('.lb-time[data-id="' + id + '"]').attr('disabled', !enabled)
+                jQuery('.lb-time[data-id="' + id + '"]').val(null)
                 
             })
         })
