@@ -114,7 +114,7 @@ class FinishedController extends Controller
     {
         $sales = Sales::isSales()->where('item_id',$id)->get();
 
-foreach ($sales as $sale){
+        foreach ($sales as $sale){
             $sale->costs = $sale->item->cost_per_unit * $sale->qty;
             $sale->profit = $sale->selling_price - $sale->costs;
             $sale->weekday = Carbon::parse($sale->date)->dayOfWeek;
