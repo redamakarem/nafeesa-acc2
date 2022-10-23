@@ -87,7 +87,7 @@
                                 <td style="padding: 5px 0px">{{ $rm->unit->name_en }}</td>
                                 <td style="padding: 5px 0px">{{ $rm->avg_cost }}</td>
                                 <td>
-                                    <input value="{{ $rm->value ?? null }}"  {{ $rm->value ? null : 'disabled' }} name="rms[{{$rm->id}}]"  data-id="{{ $rm->id }}"  type="text" class="rm-amount form-control disabled:bg-gray-400" placeholder="Amount">
+                                    <input value="{{ $rm->value ?? null }}"  {{ $rm->value ? null : 'disabled' }} name="rms[{{$rm->id}}]"  data-id="{{ $rm->id }}"  type="text" class="rm-amount form-control disabled:bg-gray-300" placeholder="Amount">
                                 </td>
                             </tr>
                         @endforeach

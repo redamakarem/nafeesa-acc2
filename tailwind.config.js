@@ -92,6 +92,11 @@ module.exports = {
     'visited',
     'disabled'
   ],
+  variants:{
+    extend:{
+      backgroundColor:['disabled']
+    }
+  },
   plugins: [
     require('@tailwindcss/forms'),
     plugin(function ({ addComponents, theme }) {
