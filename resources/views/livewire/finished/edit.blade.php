@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submit" class="pt-3">
+<form class="pt-3">
     <div class="form-group" {{$errors->any() ? 'invalid' : ''}}>
         <ul>
             @foreach ($errors->all() as $error)
@@ -45,16 +45,7 @@
             {{ trans('cruds.finished.fields.name_ar_helper') }}
         </div>
     </div>
-{{--    <div class="form-group {{ $errors->has('finished.labour_time') ? 'invalid' : '' }}">--}}
-{{--        <label class="form-label" for="labour_time">{{ trans('cruds.finished.fields.labour_time') }}</label>--}}
-{{--        <input class="form-control" type="number" name="labour_time" id="labour_time" wire:model.defer="finished.labour_time" step="0.001">--}}
-{{--        <div class="validation-message">--}}
-{{--            {{ $errors->first('finished.labour_time') }}--}}
-{{--        </div>--}}
-{{--        <div class="help-block">--}}
-{{--            {{ trans('cruds.finished.fields.labour_time_helper') }}--}}
-{{--        </div>--}}
-{{--    </div>--}}
+
     <div class="form-group {{ $errors->has('finished.kilos_per_dough') ? 'invalid' : '' }}">
         <label class="form-label required" for="kilos_per_dough">{{ trans('cruds.finished.fields.kilos_per_dough') }}</label>
         <input class="form-control" type="number" name="kilos_per_dough" id="kilos_per_dough" required wire:model.defer="finished.kilos_per_dough" step="0.001">
@@ -65,16 +56,6 @@
             {{ trans('cruds.finished.fields.kilos_per_dough_helper') }}
         </div>
     </div>
-{{--    <div class="form-group {{ $errors->has('raw_materials') ? 'invalid' : '' }}">--}}
-{{--        <label class="form-label required" for="raw_materials">{{ trans('cruds.finished.fields.raw_materials') }}</label>--}}
-{{--        <x-select-list class="form-control" required id="raw_materials" name="raw_materials" wire:model="raw_materials" :options="$this->listsForFields['raw_materials']" multiple />--}}
-{{--        <div class="validation-message">--}}
-{{--            {{ $errors->first('raw_materials') }}--}}
-{{--        </div>--}}
-{{--        <div class="help-block">--}}
-{{--            {{ trans('cruds.finished.fields.raw_materials_helper') }}--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
     <div class="form-group">
         <label class="form-label required" for="name_ar">{{ trans('cruds.rawMaterial.title') }}</label>
@@ -102,16 +83,7 @@
 
     </div>
 
-{{--    <div class="form-group {{ $errors->has('semi_finished') ? 'invalid' : '' }}">--}}
-{{--        <label class="form-label required" for="semi_finished">{{ trans('cruds.finished.fields.semi_finished') }}</label>--}}
-{{--        <x-select-list class="form-control" required id="semi_finished" name="semi_finished" wire:model="semi_finished" :options="$this->listsForFields['semi_finished']" multiple />--}}
-{{--        <div class="validation-message">--}}
-{{--            {{ $errors->first('semi_finished') }}--}}
-{{--        </div>--}}
-{{--        <div class="help-block">--}}
-{{--            {{ trans('cruds.finished.fields.semi_finished_helper') }}--}}
-{{--        </div>--}}
-{{--    </div>--}}
+
 
     <div class="form-group">
         <label class="form-label required" for="name_ar">{{ trans('cruds.semiFinished.title') }}</label>
@@ -139,16 +111,6 @@
 
     </div>
 
-{{--    <div class="form-group {{ $errors->has('labor') ? 'invalid' : '' }}">--}}
-{{--        <label class="form-label required" for="labor">{{ trans('cruds.finished.fields.labor') }}</label>--}}
-{{--        <x-select-list class="form-control" required id="labor" name="labor" wire:model="labor" :options="$this->listsForFields['labor']" multiple />--}}
-{{--        <div class="validation-message">--}}
-{{--            {{ $errors->first('labor') }}--}}
-{{--        </div>--}}
-{{--        <div class="help-block">--}}
-{{--            {{ trans('cruds.finished.fields.labor_helper') }}--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 
     <div class="form-group">

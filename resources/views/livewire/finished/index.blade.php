@@ -147,6 +147,11 @@
                                         Costs
                                     </a>
                                 @endcan
+                                    @can('finished_edit')
+                                    <a class="btn btn-sm bg-black text-white mr-2" href="{{ route('admin.finished.edit-new', $finished->id) }}">
+                                        NE
+                                    </a>
+                                @endcan
                                 </div>
                             </td>
                         </tr>
